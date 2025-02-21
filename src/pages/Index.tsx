@@ -5,6 +5,10 @@ import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/Testimonials";
 import AuthorBio from "@/components/AuthorBio";
 import Countdown from "@/components/Countdown";
+import FAQ from "@/components/FAQ";
+import BonusSection from "@/components/BonusSection";
+import OrderForm from "@/components/OrderForm";
+import FinalCTA from "@/components/FinalCTA";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -40,7 +44,7 @@ const Index = () => {
               <span className="text-sm">5558 reviews</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-black mt-4">
-              "POSSIBLY THE MOST CONTROVERSIAL MARKETING AND SALES BOOK FOR THE GENERAL PUBLIC EVER WRITTEN..."
+              "THE #1 SALES SYSTEM TO SKYROCKET YOUR BUSINESS"
             </h2>
           </div>
           <img 
@@ -52,6 +56,10 @@ const Index = () => {
       </div>
       <AuthorBio />
       <Benefits />
+      <BonusSection />
+      <FAQ />
+      <OrderForm />
+      <FinalCTA />
       <Countdown />
     </div>
   );
