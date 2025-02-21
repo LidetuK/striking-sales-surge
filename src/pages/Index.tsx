@@ -31,9 +31,27 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <Benefits />
       <Testimonials />
+      <div className="bg-white py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-yellow-500">★★★★★</span>
+              <span className="text-sm">5558 reviews</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-black mt-4">
+              "POSSIBLY THE MOST CONTROVERSIAL MARKETING AND SALES BOOK FOR THE GENERAL PUBLIC EVER WRITTEN..."
+            </h2>
+          </div>
+          <img 
+            src="/lovable-uploads/795cb83b-120a-4c29-b425-8a6c120e28af.png"
+            alt="Sell Like Crazy Book"
+            className="w-full max-w-2xl mx-auto"
+          />
+        </div>
+      </div>
       <AuthorBio />
+      <Benefits />
       <Countdown />
     </div>
   );
