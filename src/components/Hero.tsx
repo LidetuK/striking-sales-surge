@@ -18,19 +18,19 @@ const Hero = () => {
         </p>
 
         <div className="relative max-w-7xl mx-auto mb-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
             {/* Left testimonial images */}
-            <div className="flex flex-col gap-4 w-full md:w-1/4">
+            <div className="flex flex-col gap-2 w-full md:w-1/5">
               <img src="/lovable-uploads/f219b25d-d89c-468e-ba97-c149897a901d.png" alt="Testimonial 1" className="w-full rounded-lg shadow-lg" />
               <img src="/lovable-uploads/15aa6d11-958b-440d-bd79-b489673932a1.png" alt="Testimonial 2" className="w-full rounded-lg shadow-lg" />
               <img src="/lovable-uploads/8ebd4889-d01b-480e-942a-42139c5c9167.png" alt="Testimonial 3" className="w-full rounded-lg shadow-lg" />
             </div>
 
             {/* Center video */}
-            <div className="w-full md:w-1/2">
-              <div className="relative aspect-video">
+            <div className="w-full md:w-3/5">
+              <div className="relative" style={{ paddingBottom: '75%' }}>
                 <iframe
-                  className="w-full h-full rounded-lg shadow-xl"
+                  className="absolute inset-0 w-full h-full rounded-lg shadow-xl"
                   src="https://www.youtube.com/embed/6LwkxgJpv_8"
                   title="Sales System Video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -40,7 +40,7 @@ const Hero = () => {
             </div>
 
             {/* Right testimonial images */}
-            <div className="flex flex-col gap-4 w-full md:w-1/4">
+            <div className="flex flex-col gap-2 w-full md:w-1/5">
               <img src="/lovable-uploads/83fcbd8e-93e9-41d9-90f5-6b743dbc82f3.png" alt="Testimonial 4" className="w-full rounded-lg shadow-lg" />
               <img src="/lovable-uploads/b02dea9a-6f7a-40b0-8885-295a1f68b85e.png" alt="Testimonial 5" className="w-full rounded-lg shadow-lg" />
               <img src="/lovable-uploads/c708d9b0-a894-417e-9978-fff2239479cc.png" alt="Testimonial 6" className="w-full rounded-lg shadow-lg" />
