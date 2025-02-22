@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#E63911] pt-16 px-4 text-white">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#FFB700] pt-16 px-4 text-white">
       <div className="max-w-6xl mx-auto text-center">
         <p className="text-xs uppercase tracking-widest text-[#FFD700]">
           EXCLUSIVE OFFER FOR 2024 - AN AMAZON BESTSELLER
@@ -12,10 +12,10 @@ const Hero = () => {
           ADVERTISING MADMAN’S CONFESSIONAL BOMBSHELL...
         </p>
         
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mt-4">
+        <h6 className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mt-4">
           A renowned serial entrepreneur, business investor, life guru, style maverick, humanitarian, and philanthropist is generously <br />
           giving away 10,000 copies of his #1 bestselling book. This gesture aims to demonstrate the effectiveness of his '7 Secret Strategies to Achieve Unprecedented Abundance in Your Life. Simply, to prove his point that these strategies WORK!
-        </h1>
+        </h6>
 
         {/* Media Section */}
         <div className="relative flex items-center justify-center mt-6">
