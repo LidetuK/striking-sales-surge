@@ -56,22 +56,22 @@ const testimonialSets = [
 
 const AnimatedTestimonials = () => {
   return (
-    <section className="py-12 bg-[#121212] overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="py-12 bg-[#121212] overflow-hidden w-full">
+      <div className="w-full">
         <div className="flex flex-col gap-6">
           {testimonialSets.map((set, setIndex) => (
             <div key={setIndex} className="relative overflow-hidden">
               <div 
                 className={`flex gap-4 ${
-                  setIndex === 1 
-                    ? 'animate-[slideRight_80s_linear_infinite]' 
-                    : 'animate-[slideLeft_80s_linear_infinite]'
+                  setIndex % 2 === 0 
+                    ? 'animate-[slideLeft_80s_linear_infinite]' 
+                    : 'animate-[slideRight_80s_linear_infinite]'
                 }`}
                 style={{
                   minWidth: "200%",
                   display: "flex",
                   justifyContent: "flex-start",
-                  animationDirection: setIndex === 1 ? 'reverse' : 'normal',
+                  animationDirection: setIndex % 2 === 0 ? 'normal' : 'reverse',
                 }}
               >
                 {/* First set of testimonials */}
