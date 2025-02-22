@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Star } from 'lucide-react';
 
 interface Testimonial {
   name: string;
@@ -55,18 +56,25 @@ const testimonialSets = [
 
 const AnimatedTestimonials = () => {
   return (
-    <section className="py-20 bg-black text-white overflow-hidden">
+    <section className="py-20 bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16">Customer Reviews</h2>
+        <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          What Our Readers Say
+        </h2>
         <div className="flex flex-col gap-16">
           {testimonialSets.map((set, setIndex) => (
-            <div key={setIndex} className="relative overflow-hidden">
+            <div key={setIndex} className="relative overflow-hidden group">
               <div 
-                className="flex gap-8 animate-[slideLeft_30s_linear_infinite]"
+                className={`flex gap-8 ${
+                  setIndex === 1 
+                    ? 'animate-[slideRight_40s_linear_infinite]' 
+                    : 'animate-[slideLeft_30s_linear_infinite]'
+                }`}
                 style={{
                   minWidth: "200%",
                   display: "flex",
-                  justifyContent: "flex-start"
+                  justifyContent: "flex-start",
+                  animationDirection: setIndex === 1 ? 'reverse' : 'normal',
                 }}
               >
                 {/* First set of testimonials */}
@@ -74,16 +82,23 @@ const AnimatedTestimonials = () => {
                   {set.map((testimonial, idx) => (
                     <div
                       key={`${setIndex}-${idx}`}
-                      className="flex-shrink-0 w-80 p-6 rounded-lg bg-[#1a1a1a] hover:bg-[#2a2a2a] transition-all duration-300"
+                      className={`flex-shrink-0 w-80 p-6 rounded-xl backdrop-blur-lg 
+                        ${setIndex === 0 ? 'bg-gradient-to-br from-purple-900/80 to-indigo-900/80 hover:from-purple-800/80 hover:to-indigo-800/80' : 
+                          setIndex === 1 ? 'bg-gradient-to-br from-orange-900/80 to-red-900/80 hover:from-orange-800/80 hover:to-red-800/80' :
+                          'bg-gradient-to-br from-pink-900/80 to-rose-900/80 hover:from-pink-800/80 hover:to-rose-800/80'
+                        } 
+                        shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1`}
                     >
-                      <div className="mb-4">
+                      <div className="flex mb-4">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <span key={i} className="text-yellow-400">★</span>
+                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                         ))}
                       </div>
-                      <h3 className="font-bold text-xl mb-2 text-primary">{testimonial.title}</h3>
-                      <p className="text-gray-300 mb-4">{testimonial.text}</p>
-                      <p className="text-sm text-gray-400">- {testimonial.name}</p>
+                      <h3 className="font-bold text-xl mb-2 text-white/90">{testimonial.title}</h3>
+                      <p className="text-gray-300 mb-4 text-sm leading-relaxed">{testimonial.text}</p>
+                      <div className="pt-4 border-t border-white/10">
+                        <p className="text-sm text-gray-400 font-medium">{testimonial.name}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -92,16 +107,23 @@ const AnimatedTestimonials = () => {
                   {set.map((testimonial, idx) => (
                     <div
                       key={`${setIndex}-${idx}-duplicate`}
-                      className="flex-shrink-0 w-80 p-6 rounded-lg bg-[#1a1a1a] hover:bg-[#2a2a2a] transition-all duration-300"
+                      className={`flex-shrink-0 w-80 p-6 rounded-xl backdrop-blur-lg 
+                        ${setIndex === 0 ? 'bg-gradient-to-br from-purple-900/80 to-indigo-900/80 hover:from-purple-800/80 hover:to-indigo-800/80' : 
+                          setIndex === 1 ? 'bg-gradient-to-br from-orange-900/80 to-red-900/80 hover:from-orange-800/80 hover:to-red-800/80' :
+                          'bg-gradient-to-br from-pink-900/80 to-rose-900/80 hover:from-pink-800/80 hover:to-rose-800/80'
+                        } 
+                        shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1`}
                     >
-                      <div className="mb-4">
+                      <div className="flex mb-4">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <span key={i} className="text-yellow-400">★</span>
+                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                         ))}
                       </div>
-                      <h3 className="font-bold text-xl mb-2 text-primary">{testimonial.title}</h3>
-                      <p className="text-gray-300 mb-4">{testimonial.text}</p>
-                      <p className="text-sm text-gray-400">- {testimonial.name}</p>
+                      <h3 className="font-bold text-xl mb-2 text-white/90">{testimonial.title}</h3>
+                      <p className="text-gray-300 mb-4 text-sm leading-relaxed">{testimonial.text}</p>
+                      <div className="pt-4 border-t border-white/10">
+                        <p className="text-sm text-gray-400 font-medium">{testimonial.name}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
