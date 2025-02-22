@@ -10,6 +10,7 @@ import BonusSection from "@/components/BonusSection";
 import OrderForm from "@/components/OrderForm";
 import FinalCTA from "@/components/FinalCTA";
 import Navbar from "@/components/Navbar";
+import Review from "@/components/Review";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 
 const Index = () => {
@@ -22,6 +23,7 @@ const Index = () => {
       <AuthorBio />
       <Countdown />
       <AnimatedTestimonials />
+      <Review/>
       <BonusSection />
       <FAQ />
       <OrderForm />

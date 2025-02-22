@@ -1,29 +1,51 @@
-
 const AuthorBio = () => {
   return (
-    <section className="py-20 bg-secondary text-white">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <img 
-              src="/lovable-uploads/fce0c98b-408e-4028-8c50-2254cc1b1973.png"
-              alt="Sabri Suby"
-              className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
-            />
-          </div>
-          <div>
-            <h2 className="text-4xl font-bold mb-6">Meet Sabri Suby</h2>
-            <p className="text-lg mb-6">
-              From starting his business in a bedroom with $50 and an old computer, 
-              Sabri built Australia's fastest growing digital marketing agency. 
-              His proven system has generated over $7.8 billion in sales across 
-              1067 different industries.
-            </p>
-            <p className="text-lg">
-              Now, for the first time ever, he's revealing his complete selling system
-              that has transformed thousands of businesses worldwide.
-            </p>
-          </div>
+    <section className="py-20 bg-white text-gray-900">
+      <div className="max-w-5xl mx-auto px-4 text-center">
+        {/* Bold, Eye-Catching Quote */}
+        <h2 className="text-4xl md:text-5xl font-extrabold leading-tight uppercase text-gray-900">
+          "…See why this book is unlike any other and how it can transform your career, your business, and life, just as it transformed mine…"
+        </h2>
+
+        {/* Images Section */}
+        <div className="relative flex justify-center mt-10">
+          {/* Book Image */}
+          <img
+            src="/lovable-uploads/download (1).png"
+            alt="Sell Like Crazy Book"
+            className="rounded-lg shadow-2xl w-full max-w-xs mx-auto"
+          />
+          
+          {/* Left Diagram */}
+          <img
+            src="/lovable-uploads/download.png"
+            alt="Marketing Concept"
+            className="absolute top-10 left-[-50px] w-48 hidden md:block"
+          />
+          
+          {/* Right Diagram */}
+          <img
+            src="/lovable-uploads/download (2).png"
+            alt="Traffic Types"
+            className="absolute top-10 right-[-50px] w-48 hidden md:block"
+          />
+        </div>
+
+        {/* Content Section */}
+        <div className="text-left text-xl leading-relaxed mt-12 max-w-3xl mx-auto">
+          <p className="mt-4 font-semibold text-gray-900">
+            <span className="block text-2xl font-bold text-gray-800 mb-4">Discover the Key Benefits:</span>
+            <span className="block mt-3">🔥 <strong>Spiritual Growth:</strong> Deepen your spiritual connection and find inner peace for a more fulfilling life.</span>
+            <span className="block mt-3">💪 <strong>Wellness Enhancement:</strong> Improve your physical and mental health to boost overall well-being.</span>
+            <span className="block mt-3">📚 <strong>Knowledge Expansion:</strong> Gain valuable insights to make informed decisions and foster continuous growth.</span>
+            <span className="block mt-3">❤️ <strong>Relationship Building:</strong> Master the principles of strong, healthy connections with loved ones and colleagues.</span>
+            <span className="block mt-3">🚀 <strong>Action-Oriented Mindset:</strong> Cultivate a proactive attitude that drives success and fulfillment.</span>
+            <span className="block mt-3">💰 <strong>Financial Mastery:</strong> Learn effective strategies to manage money wisely and achieve financial freedom.</span>
+            <span className="block mt-3">🌟 <strong>Lifestyle Improvement:</strong> Create a meaningful and enjoyable life tailored to your aspirations.</span>
+            <span className="block mt-3">🔥 <strong>Motivation Ignition:</strong> Develop techniques to stay focused and driven towards your biggest goals.</span>
+            <span className="block mt-3">🛑 <strong>Pattern Breaking:</strong> Identify and break free from negative habits to unlock personal and professional growth.</span>
+            <span className="block mt-3">🌍 <strong>Holistic Development:</strong> Elevate every aspect of your life with a well-rounded self-improvement approach.</span>
+          </p>
         </div>
       </div>
     </section>
