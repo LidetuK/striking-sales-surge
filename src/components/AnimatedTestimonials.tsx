@@ -11,40 +11,40 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    name: "Dr E.",
+    name: "Nacima",
     rating: 5,
-    title: "Audacity works! Attention Value count",
-    text: "These experiences result in business exact actions which are missing from most marketing strategies. I find them compelling."
+    title: "All in One",
+    text: "This book contains everything from the offer to the process. The images, strategies, statistics, and real-life examples make it even more compelling."
   },
   {
-    name: "Ahmed",
+    name: "Juve",
     rating: 5,
-    title: "Certified MONEY MAKER",
-    text: "Do you want to scale and grow your business? Read this book. If not, don't read this book."
+    title: "I am amazed!",
+    text: "This book clarified what steps to take to improve my business branding and focus. I would highly recommend it to anybody who wants to learn how to increase sales."
   },
   {
-    name: "Steve B.",
+    name: "Steve R.",
     rating: 5,
     title: "A Fresh Look at Marketing",
-    text: "I learned a lot from this book and it's changed the way I do my marketing. I would recommend this to anyone who wants to really get a fresh take on how to market effectively."
+    text: "I learned a lot from this book and it's changed the way I do my marketing. I would recommend this to anyone who is ready for a fresh take."
   },
   {
-    name: "John D.",
+    name: "Gabriel F.",
     rating: 5,
-    title: "Game Changing Marketing",
-    text: "This book contains practical strategies that have transformed my business approach completely."
+    title: "Dream to BUSINESS",
+    text: "I always dreamed of building a business and enjoying the freedom of working from my laptop, traveling the world and living on my own terms. Thanks to this book."
   },
   {
-    name: "Sarah M.",
+    name: "Abdul A.",
     rating: 5,
-    title: "Worth Every Penny",
-    text: "The insights in this book have already paid for themselves many times over in my business."
+    title: "Got everything that the OG marketing experts talk",
+    text: "He knows exactly what he is doing whether it is in his book or through. He man knows marketing inside out and some of his tactics are like the OGs."
   },
   {
-    name: "Michael R.",
+    name: "Dylan",
     rating: 5,
-    title: "Revolutionary Approach",
-    text: "A must-read for anyone serious about growing their business in today's digital landscape."
+    title: "Finally a book that actually delivers great value.",
+    text: "Great book, I would definitely recommend it to anyone who is interested in being an entrepreneur. Reading the book definitely open my eyes."
   }
 ];
 
@@ -56,19 +56,16 @@ const testimonialSets = [
 
 const AnimatedTestimonials = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-          What Our Readers Say
-        </h2>
-        <div className="flex flex-col gap-16">
+    <section className="py-12 bg-[#121212] overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex flex-col gap-6">
           {testimonialSets.map((set, setIndex) => (
-            <div key={setIndex} className="relative overflow-hidden group">
+            <div key={setIndex} className="relative overflow-hidden">
               <div 
-                className={`flex gap-8 ${
+                className={`flex gap-4 ${
                   setIndex === 1 
-                    ? 'animate-[slideRight_40s_linear_infinite]' 
-                    : 'animate-[slideLeft_30s_linear_infinite]'
+                    ? 'animate-[slideRight_80s_linear_infinite]' 
+                    : 'animate-[slideLeft_80s_linear_infinite]'
                 }`}
                 style={{
                   minWidth: "200%",
@@ -78,51 +75,41 @@ const AnimatedTestimonials = () => {
                 }}
               >
                 {/* First set of testimonials */}
-                <div className="flex gap-8 min-w-full">
+                <div className="flex gap-4 min-w-full">
                   {set.map((testimonial, idx) => (
                     <div
                       key={`${setIndex}-${idx}`}
-                      className={`flex-shrink-0 w-80 p-6 rounded-xl backdrop-blur-lg 
-                        ${setIndex === 0 ? 'bg-gradient-to-br from-purple-900/80 to-indigo-900/80 hover:from-purple-800/80 hover:to-indigo-800/80' : 
-                          setIndex === 1 ? 'bg-gradient-to-br from-orange-900/80 to-red-900/80 hover:from-orange-800/80 hover:to-red-800/80' :
-                          'bg-gradient-to-br from-pink-900/80 to-rose-900/80 hover:from-pink-800/80 hover:to-rose-800/80'
-                        } 
-                        shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1`}
+                      className="flex-shrink-0 w-[300px] p-4 rounded-lg bg-[#1A1A1A] border border-gray-800"
                     >
-                      <div className="flex mb-4">
+                      <div className="flex mb-2">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                         ))}
                       </div>
-                      <h3 className="font-bold text-xl mb-2 text-white/90">{testimonial.title}</h3>
-                      <p className="text-gray-300 mb-4 text-sm leading-relaxed">{testimonial.text}</p>
-                      <div className="pt-4 border-t border-white/10">
-                        <p className="text-sm text-gray-400 font-medium">{testimonial.name}</p>
+                      <h3 className="font-bold text-base mb-2 text-white">{testimonial.title}</h3>
+                      <p className="text-gray-400 mb-3 text-sm leading-relaxed line-clamp-3">{testimonial.text}</p>
+                      <div className="pt-2 border-t border-gray-800">
+                        <p className="text-sm text-gray-500">{testimonial.name}</p>
                       </div>
                     </div>
                   ))}
                 </div>
                 {/* Duplicate set for seamless loop */}
-                <div className="flex gap-8 min-w-full">
+                <div className="flex gap-4 min-w-full">
                   {set.map((testimonial, idx) => (
                     <div
                       key={`${setIndex}-${idx}-duplicate`}
-                      className={`flex-shrink-0 w-80 p-6 rounded-xl backdrop-blur-lg 
-                        ${setIndex === 0 ? 'bg-gradient-to-br from-purple-900/80 to-indigo-900/80 hover:from-purple-800/80 hover:to-indigo-800/80' : 
-                          setIndex === 1 ? 'bg-gradient-to-br from-orange-900/80 to-red-900/80 hover:from-orange-800/80 hover:to-red-800/80' :
-                          'bg-gradient-to-br from-pink-900/80 to-rose-900/80 hover:from-pink-800/80 hover:to-rose-800/80'
-                        } 
-                        shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1`}
+                      className="flex-shrink-0 w-[300px] p-4 rounded-lg bg-[#1A1A1A] border border-gray-800"
                     >
-                      <div className="flex mb-4">
+                      <div className="flex mb-2">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                         ))}
                       </div>
-                      <h3 className="font-bold text-xl mb-2 text-white/90">{testimonial.title}</h3>
-                      <p className="text-gray-300 mb-4 text-sm leading-relaxed">{testimonial.text}</p>
-                      <div className="pt-4 border-t border-white/10">
-                        <p className="text-sm text-gray-400 font-medium">{testimonial.name}</p>
+                      <h3 className="font-bold text-base mb-2 text-white">{testimonial.title}</h3>
+                      <p className="text-gray-400 mb-3 text-sm leading-relaxed line-clamp-3">{testimonial.text}</p>
+                      <div className="pt-2 border-t border-gray-800">
+                        <p className="text-sm text-gray-500">{testimonial.name}</p>
                       </div>
                     </div>
                   ))}
