@@ -42,7 +42,6 @@ const Hero = () => {
         {/* Logos */}
         <div className="mt-8 flex flex-wrap justify-center items-center gap-6 opacity-80">
           <img src="/lovable-uploads/logo.png" alt="Forbes" className="h-24" />
-          <br> </br>
         </div>
       </div>
     </div>
