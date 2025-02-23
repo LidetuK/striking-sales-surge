@@ -37,20 +37,21 @@ const Hero = () => {
           HURRY! STOCK OF THIS BOOK AS OF FEBRUARY 21 IS LOW
         </p>
 
-        <div className="mt-4 flex flex-wrap justify-center items-center gap-6 opacity-80">
+        <div className="mt-8 flex flex-wrap justify-center items-center gap-6 opacity-80 mb-32">
           <img src="/lovable-uploads/logo.png" alt="Forbes" className="h-24" />
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+      {/* Curved Wave Section - Now properly separated */}
+      <div className="absolute -bottom-0 left-1 w-full overflow-hidden">
         <svg
           viewBox="0 0 1440 320"
-          className="relative w-full h-[100px] md:h-[100px]"
+          className="relative w-full h-[180px] md:h-[280px]"
           preserveAspectRatio="none"
         >
           <path
             fill="#ffffff"
-            d="M0,160L48,165.3C96,171,192,181,288,197.3C384,213,480,235,576,234.7C672,235,768,213,864,202.7C960,192,1056,192,1152,197.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            d="M0,320L48,304C96,288,192,256,288,245.3C384,235,480,245,576,250.7C672,256,768,256,864,250.7C960,245,1056,235,1152,240C1248,245,1344,267,1392,277.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
             className="duration-300 ease-in-out"
           />
         </svg>

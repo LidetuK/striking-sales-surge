@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -20,13 +19,19 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold text-primary">SLC</span>
+            <img 
+              src={isScrolled 
+                ? "/lovable-uploads/Resk-Que-Logo-Clear-Back-black-1.png" 
+                : "/lovable-uploads/Resk-Que-Logo-Clear-Back-white-1.png"} 
+              alt="Logo" 
+              className="h-14 transition-all duration-300"
+            />
           </div>
           <Button 
             className="bg-primary hover:bg-primary-hover text-white transition-all duration-300 transform hover:scale-105"
-            onClick={() => document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => window.open("https://reskque.com/", "_blank")}
           >
-            Get Your Free Copy
+            Explore More
           </Button>
         </div>
       </div>

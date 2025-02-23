@@ -11,6 +11,8 @@ import OrderForm from "@/components/OrderForm";
 import FinalCTA from "@/components/FinalCTA";
 import Navbar from "@/components/Navbar";
 import Review from "@/components/Review";
+import BookShowcase from "@/components/BookShowcase";
+import LimitedOffer from "@/components/LimitedOffer";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 
 const Index = () => {
@@ -25,7 +27,9 @@ const Index = () => {
       <AnimatedTestimonials />
       <Review/>
       <BonusSection />
+      <BookShowcase />
       <FAQ />
+      <LimitedOffer />
       <OrderForm />
       <FinalCTA />
     </div>

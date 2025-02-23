@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
 
@@ -11,7 +10,7 @@ const benefits = [
 
 const FinalCTA = () => {
   return (
-    <section className="py-20 bg-primary text-white">
+    <section className="py-20 bg-[#FFB700] text-white">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold mb-8">
           Don't Miss This Opportunity to Transform Your Business
