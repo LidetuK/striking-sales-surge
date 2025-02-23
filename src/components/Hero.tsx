@@ -5,11 +5,11 @@ const Hero = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#FFB700] pt-16 px-4 text-white">
       <div className="max-w-6xl mx-auto text-center">
-        <p className="text-xs uppercase tracking-widest text-[#FFD700]">
-          EXCLUSIVE OFFER FOR 2024 - AN AMAZON BESTSELLER
+        <p className="text-xs uppercase tracking-widest text-[#000000]">
+        A renowned serial entrepreneur, business investor, life guru,
         </p>
         <p className="text-sm mt-2 uppercase tracking-wider italic">
-          ADVERTISING MADMAN’S CONFESSIONAL BOMBSHELL...
+        style maverick, humanitarian, and philanthropist is generously 
         </p>
 
         <h6 className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mt-4">
