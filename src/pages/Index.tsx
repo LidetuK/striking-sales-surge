@@ -9,7 +9,7 @@ import FAQ from "@/components/FAQ";
 import BonusSection from "@/components/BonusSection";
 import OrderForm from "@/components/OrderForm";
 import FinalCTA from "@/components/FinalCTA";
-import Navbar from "@/components/Navbar";
+
 import Review from "@/components/Review";
 import BookShowcase from "@/components/BookShowcase";
 import LimitedOffer from "@/components/LimitedOffer";
@@ -18,10 +18,11 @@ import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 const Index = () => {
   return (
     <div className="relative">
-      <Navbar />
+     
       <Hero />
       <Benefits />
       <Testimonials />
+      <OrderForm />
       <AuthorBio />
       <Countdown />
       <AnimatedTestimonials />
@@ -30,7 +31,6 @@ const Index = () => {
       <BookShowcase />
       <FAQ />
       <LimitedOffer />
-      <OrderForm />
       <FinalCTA />
     </div>
   );

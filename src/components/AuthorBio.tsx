@@ -3,7 +3,7 @@ const AuthorBio = () => {
     <section className="py-20 bg-white text-gray-900">
       <div className="max-w-5xl mx-auto px-4 text-center">
         {/* Bold, Eye-Catching Quote */}
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-tight uppercase text-gray-900">
+        <h2 className="text-6xl md:text-7xl font-extrabold leading-tight uppercase text-red-600">
           "…See why this book is unlike any other and how it can transform your career, your business, and life, just as it transformed mine…"
         </h2>
 
@@ -11,24 +11,13 @@ const AuthorBio = () => {
         <div className="relative flex justify-center mt-10">
           {/* Book Image */}
           <img
-            src="/lovable-uploads/download (1).png"
+            src="/lovable-uploads/15aa6d11-958b-440d-bd79-b489673932a1.png"
             alt="Sell Like Crazy Book"
-            className="rounded-lg shadow-2xl w-full max-w-xs mx-auto"
+            className="rounded-lg shadow-2xl w-full max-w-5xl mx-auto"
           />
+         
           
-          {/* Left Diagram */}
-          <img
-            src="/lovable-uploads/download.png"
-            alt="Marketing Concept"
-            className="absolute top-10 left-[-50px] w-48 hidden md:block"
-          />
-          
-          {/* Right Diagram */}
-          <img
-            src="/lovable-uploads/download (2).png"
-            alt="Traffic Types"
-            className="absolute top-10 right-[-50px] w-48 hidden md:block"
-          />
+         
         </div>
 
         {/* Content Section */}

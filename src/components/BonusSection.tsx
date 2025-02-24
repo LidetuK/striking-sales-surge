@@ -1,4 +1,3 @@
-
 import { Gift, Zap, Target, Users } from "lucide-react";
 
 const bonuses = [
@@ -33,7 +32,7 @@ const BonusSection = () => {
     <section className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-5xl font-bold mb-4 text-red-600">
             FREE Bonuses (Worth $4,188)
           </h2>
           <p className="text-xl text-gray-600">
@@ -48,7 +47,7 @@ const BonusSection = () => {
               className="bg-white p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
               <div className="mb-4">{bonus.icon}</div>
-              <h3 className="text-xl font-bold mb-2">{bonus.title}</h3>
+              <h3 className="text-3xl font-bold mb-2 text-red-600">{bonus.title}</h3>
               <p className="text-primary font-bold mb-2">{bonus.value}</p>
               <p className="text-gray-600">{bonus.description}</p>
             </div>

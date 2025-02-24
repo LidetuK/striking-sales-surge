@@ -35,9 +35,10 @@ const testimonials = [
     return (
       <section className="py-20 bg-white text-center">
         {/* Headline */}
-        <h2 className="text-3xl md:text-4xl font-bold text-black uppercase mb-10">
-          SEE WHY THOUSANDS OF PEOPLE <br /> ARE RAVING ABOUT THIS BOOK...
-        </h2>
+        <h2 className="text-5xl md:text-7xl font-bold text-red-600 uppercase mb-10">
+  SEE WHY THOUSANDS OF PEOPLE <br /> ARE RAVING ABOUT <br /> THIS BOOK...
+</h2>
+
   
         {/* Large Image */}
         <div className="flex justify-center mb-10">

@@ -44,8 +44,7 @@ const testimonialSections = {
     { name: "Daniel R.", rating: 5, title: "Proven Tactics", text: "Every business owner should have this book." },
     { name: "Charlotte N.", rating: 5, title: "A Must-Have", text: "My revenue has skyrocketed thanks to these lessons." },
     { name: "Ryan G.", rating: 5, title: "The Best Business Guide", text: "It takes the mystery out of growth." },
-    { name: "Ava T.", rating: 5, title: "Business Success Blueprint", text: "I’ve built my dream business using these principles." },
-    { name: "Ethan W.", rating: 5, title: "Exceptional!", text: "Game-changing knowledge for entrepreneurs." }
+     { name: "Ethan W.", rating: 5, title: "Exceptional!", text: "Game-changing knowledge for entrepreneurs." }
   ],
   "Personal Success": [
     { name: "Carly", rating: 5, title: "Life-Changing", text: "Elevate Higher helped me find purpose in my work." },

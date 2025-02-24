@@ -9,11 +9,12 @@ const OrderForm = () => {
           {/* Book Image & Description */}
           <div className="text-center md:text-left">
             
-            <img 
-  src="/lovable-uploads/download (1).png" 
+          <img 
+  src="/lovable-uploads/c708d9b0-a894-417e-9978-fff2239479cc.png" 
   alt="Your Book Title" 
-  className="mx-auto md:mx-0 w-320 md:w-896 h-auto shadow-lg rounded-lg"
+  className="mx-auto md:mx-0 w-full md:w-[600px] h-auto shadow-lg rounded-lg"
 />
+
 
             <h3 className="text-2xl font-semibold mt-6">
               Discover the Secrets to <span className="text-primary">Success</span>

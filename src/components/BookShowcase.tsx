@@ -1,10 +1,10 @@
 const BookShowcase = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-purple-700 to-indigo-800 text-white text-center">
+    <section className="py-20 bg-[#FFB700] text-black text-center">
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Title */}
-        <h1 className="text-5xl font-extrabold uppercase tracking-wide leading-tight">
-          UNLEASH YOUR BEST SELF. BEGIN NOW.
+        <h1 className="text-7xl font-extrabold uppercase tracking-wide leading-tight text-red-600">
+          UNLEASH YOUR BEST SELF, BEGIN NOW.
         </h1>
 
         {/* Book Introduction */}
@@ -38,9 +38,9 @@ const BookShowcase = () => {
             Prefer a digital version? Get the audiobook, Kindle, iBooks, or PDF for a small fee.
           </p>
 
-          {/* Updated Button with Scroll Functionality */}
+          {/* Updated Button */}
           <button
-            className="bg-black hover:bg-black/90 text-white text-lg px-12 py-6 mt-6 font-bold uppercase rounded-lg transform transition-all duration-300 hover:scale-105 shadow-lg"
+            className="bg-red-600 hover:bg-red-700 text-white text-2xl px-16 py-8 mt-8 font-bold uppercase rounded-xl transform transition-all duration-300 hover:scale-110 shadow-xl"
             onClick={() =>
               document.getElementById("order")?.scrollIntoView({ behavior: "smooth" })
             }
@@ -55,7 +55,7 @@ const BookShowcase = () => {
         </p>
 
         <p className="mt-6 text-lg font-bold">Warm regards,</p>
-        <p className="text-xl font-bold text-yellow-300">RQ</p>
+        <p className="text-xl font-bold text-yellow-600">RQ</p>
       </div>
     </section>
   );

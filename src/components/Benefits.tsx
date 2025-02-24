@@ -1,18 +1,3 @@
-const benefits = [
-  {
-    title: "17 Sales-Producing Secrets",
-    description: "Discover proven strategies that go against everything you've been told by the 'Gurus'",
-  },
-  {
-    title: "Step-by-Step System",
-    description: "Get a complete blueprint for generating consistent sales in any niche",
-  },
-  {
-    title: "Real World Results",
-    description: "$7.8 Billion in sales across 1067 different niches - proven to work",
-  }
-];
-
 const audience = [
   "Aspiring Entrepreneurs: Individuals looking to start their own business and seeking guidance on how to achieve success.",
   "Business Professionals: Those aiming to enhance their career, improve their skills, and achieve greater professional success.",
@@ -32,30 +17,17 @@ const Benefits = () => {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16">
-          WHO NEEDS THIS
+        <h2 className="text-9xl font-bold text-red-600 text-center mb-16 w-full">
+          WHO NEEDS THIS?
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {audience.map((item, idx) => (
-            <div key={idx} className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <p className="text-gray-800">{item}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-12">
-          {benefits.map((benefit, idx) => (
             <div 
-              key={idx}
-              className="text-center p-8 rounded-lg glass-card transform transition-all duration-500 hover:scale-105"
-            >
-              <h3 className="text-xl font-bold mb-4 text-primary">
-                {benefit.title}
-              </h3>
-              <p className="text-gray-700">
-                {benefit.description}
-              </p>
+              key={idx} 
+              className="bg-gray-100 p-8 rounded-lg shadow-md transition duration-300 hover:shadow-2xl hover:scale-110 flex items-center text-xl font-semibold border-l-4 border-red-500">
+              <span className="text-red-600 text-3xl mr-4">✔️</span>
+              <p className="text-gray-800 flex-1">{item}</p>
             </div>
           ))}
         </div>

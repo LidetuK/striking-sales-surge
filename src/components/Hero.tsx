@@ -12,25 +12,49 @@ const Hero = () => {
           style maverick, humanitarian, and philanthropist is generously 
         </p>
 
-        <h6 className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mt-4">
-          Giving away 10,000 copies of his #1 bestselling book. This gesture aims to demonstrate the effectiveness of his '7 Secret Strategies to Achieve Unprecedented Abundance in Your Life. Simply, to prove his point that these strategies WORK!
-        </h6>
+        {/* Main headline with structured alignment */}
+        <div className="space-y-2">
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+            GIVING AWAY 10,000 COPIES OF HIS #1
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+          BESTSELLING BOOK This Gesture Aims To
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+            Demonstrate the Effectiveness of his
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+             '7 Secret Strategies to Achieve
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+            Unprecedented Abundance in
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+          Your Life' Simply to Prove 
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+          His Point That These
+          </p>
+          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
+          Strategies WORK!
+          </p>
+        </div>
 
         <div className="relative flex items-center justify-center mt-6">
           <img 
             src="/lovable-uploads/download (1).png" 
             alt="Main Feature" 
-            className="rounded-lg shadow-xl w-4/5 md:w-3/4 lg:w-2/3"
+            className="rounded-lg shadow-xl w-[90%] md:w-[85%] lg:w-[80%]"
           />
         </div>
 
         <Button 
           size="lg"
-          className="bg-black hover:bg-black/90 text-white text-lg px-12 py-6 mt-6 font-bold uppercase rounded-lg transform transition-all duration-300 hover:scale-105 shadow-lg"
+          className="bg-red-600 hover:bg-red-700 text-white text-2xl px-16 py-8 mt-8 font-bold uppercase rounded-lg transform transition-all duration-300 hover:scale-105 shadow-lg"
           onClick={() => document.getElementById("order")?.scrollIntoView({ behavior: "smooth" })}
         >
           RUSH ME A FREE COPY
-          <ArrowRight className="ml-2 h-5 w-5" />
+          <ArrowRight className="ml-2 h-6 w-6" />
         </Button>
 
         <p className="mt-4 text-sm opacity-80 font-bold">
@@ -38,11 +62,15 @@ const Hero = () => {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center items-center gap-6 opacity-80 mb-32">
-          <img src="/lovable-uploads/logo.png" alt="Forbes" className="h-24" />
+          <img 
+            src="/lovable-uploads/Screenshot_2025-02-24_162919-removebg-preview.png" 
+            alt="Forbes" 
+            className="h-32 md:h-40"
+          />
         </div>
       </div>
 
-      {/* Curved Wave Section - Now properly separated */}
+      {/* Curved Wave Section */}
       <div className="absolute -bottom-0 left-1 w-full overflow-hidden">
         <svg
           viewBox="0 0 1440 320"

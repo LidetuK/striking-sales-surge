@@ -3,9 +3,10 @@ const LimitedOffer = () => {
       <section className="py-20 bg-gray-900 text-white text-center">
         <div className="max-w-5xl mx-auto px-6">
           {/* Section Heading */}
-          <h2 className="text-5xl font-extrabold uppercase leading-tight">
-            🎁 Get My Bestselling Book **For Free!**
-          </h2>
+          
+          <h1 className="text-7xl font-extrabold uppercase tracking-wide leading-tight text-white-600">
+          🎁 Get My Bestselling Book For Free!
+        </h1>
   
           {/* Content */}
           <div className="mt-8 bg-white text-gray-900 p-8 rounded-lg shadow-lg">
