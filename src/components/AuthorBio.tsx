@@ -3,9 +3,10 @@ const AuthorBio = () => {
     <section className="py-20 bg-white text-gray-900">
       <div className="max-w-5xl mx-auto px-4 text-center">
         {/* Bold, Eye-Catching Quote */}
-        <h2 className="text-6xl md:text-7xl font-extrabold leading-tight uppercase text-red-600">
-          "…See why this book is unlike any other and how it can transform your career, your business, and life, just as it transformed mine…"
-        </h2>
+        <h2 className="text-2xl md:text-5xl font-extrabold leading-tight uppercase text-red-600">
+  "…See why this book is unlike any other and how it can transform your career, your business, and life, just as it transformed mine…"
+</h2>
+
 
         {/* Images Section */}
         <div className="relative flex justify-center mt-10">
