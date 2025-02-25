@@ -12,9 +12,13 @@ const FinalCTA = () => {
   return (
     <section className="py-20 bg-[#FFB700] text-white">
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <h1 className="text-7xl font-extrabold uppercase tracking-wide leading-tight text-white-600">
-        Don't Miss This Opportunity to Transform Your Business
+      
+
+
+<h1 className="text-6xl font-extrabold uppercase tracking-wide leading-tight text-white-600">
+          Get My Bestselling Book For Free!
         </h1>
+
         
         <div className="mb-8">
           {benefits.map((benefit, idx) => (

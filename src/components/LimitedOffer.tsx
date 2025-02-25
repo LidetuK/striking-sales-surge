@@ -4,8 +4,8 @@ const LimitedOffer = () => {
         <div className="max-w-5xl mx-auto px-6">
           {/* Section Heading */}
           
-          <h1 className="text-7xl font-extrabold uppercase tracking-wide leading-tight text-white-600">
-          🎁 Get My Bestselling Book For Free!
+          <h1 className="text-5xl font-extrabold uppercase tracking-wide leading-tight text-white-600">
+          🎁 Don't Miss This Opportunity <br /> to Transform Your Business
         </h1>
   
           {/* Content */}
