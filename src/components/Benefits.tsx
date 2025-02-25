@@ -10,18 +10,30 @@ const audience = [
   "Motivated Individuals: Anyone looking for inspiration and motivation to achieve their goals and dreams.",
   "Lifestyle Enthusiasts: People interested in creating a balanced, enjoyable, and fulfilling lifestyle.",
   "Founders: Entrepreneurs who have already started their businesses and are looking for strategies to scale and sustain their success.",
-  "Content Creators: Individuals who produce digital content and are seeking ways to enhance their creativity, productivity, and audience engagement."
+  "Content Creators: Individuals who produce digital content and are seeking ways to enhance their creativity, productivity, and audience engagement.",
 ];
 
 const Benefits = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white text-center">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-9xl font-bold text-red-600 text-center mb-16 w-full">
+        {/* Title */}
+        <h2 className="text-7xl font-bold text-red-600 mb-4">
           WHO NEEDS THIS?
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        {/* Subtitle */}
+        <h3 className="text-5xl font-semibold text-gray-700 mb-8">
+          7 SECRET STRATEGIES TO ACHIEVE UNPRECEDENTED ABUNDANCE IN YOUR LIFE.
+        </h3>
+
+        {/* Image */}
+        <div className="flex justify-center mb-16">
+          <img src="/lovable-uploads/Screenshot 2025-02-25 194914.png" alt="Who Needs This?" className="w-auto max-w-full h-auto" />
+        </div>
+
+        {/* Audience List */}
+        <div className="grid md:grid-cols-2 gap-8">
           {audience.map((item, idx) => (
             <div 
               key={idx} 

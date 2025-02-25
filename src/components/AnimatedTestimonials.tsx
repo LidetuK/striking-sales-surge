@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Star } from "lucide-react";
 import { motion, useAnimationControls } from "framer-motion";
 
@@ -24,9 +24,8 @@ const TestimonialSlider = () => {
   const controlsSection1 = useAnimationControls();
   const controlsSection2 = useAnimationControls();
   const controlsSection3 = useAnimationControls();
-  const [pausedSections, setPausedSections] = useState<number[]>([]);
-  
-  const startAnimation = async (control: any) => {
+
+  const startAnimation = async (control) => {
     await control.start({
       x: ["0%", "-50%"],
       transition: {
@@ -40,78 +39,34 @@ const TestimonialSlider = () => {
   };
 
   useEffect(() => {
-    const controls = [controlsSection1, controlsSection2, controlsSection3];
-    controls.forEach((control, index) => {
-      if (!pausedSections.includes(index)) {
-        startAnimation(control);
-      }
-    });
-  }, [controlsSection1, controlsSection2, controlsSection3, pausedSections]);
-
-  const handleMouseEnter = (sectionIndex: number) => {
-    setPausedSections((prev) => [...prev, sectionIndex]);
-    const currentX = document.querySelector(`#section-${sectionIndex}`)?.getBoundingClientRect().x || 0;
-    const controls = [controlsSection1, controlsSection2, controlsSection3];
-    
-    // Smoothly pause at the current position
-    controls[sectionIndex].start({
-      x: currentX,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    });
-  };
-
-  const handleMouseLeave = (sectionIndex: number) => {
-    setPausedSections((prev) => prev.filter(index => index !== sectionIndex));
-    const currentX = document.querySelector(`#section-${sectionIndex}`)?.getBoundingClientRect().x || 0;
-    const controls = [controlsSection1, controlsSection2, controlsSection3];
-    
-    // Resume animation with a smooth transition
-    controls[sectionIndex].start({
-      x: [currentX, "-50%"],
-      transition: {
-        x: {
-          duration: 45,
-          ease: "linear",
-          repeat: Infinity,
-        },
-      },
-    });
-  };
+    startAnimation(controlsSection1);
+    startAnimation(controlsSection2);
+    startAnimation(controlsSection3);
+  }, []);
 
   return (
     <div className="w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <h2 className="text-4xl font-bold text-white text-center mb-2">What People Are Saying</h2>
-        <p className="text-gray-400 text-center">Trusted by professionals worldwide</p>
+       
       </div>
 
       {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => (
         <div key={sectionName} className="mb-12 last:mb-0">
           <div className="relative overflow-hidden">
             <motion.div
-              id={`section-${sectionIndex}`}
               className="flex space-x-6 px-4"
               animate={[controlsSection1, controlsSection2, controlsSection3][sectionIndex]}
               initial={{ x: "0%" }}
               style={{ width: "fit-content" }}
-              onMouseEnter={() => handleMouseEnter(sectionIndex)}
-              onMouseLeave={() => handleMouseLeave(sectionIndex)}
             >
-              {[...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
+              {[...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
                 <div
                   key={`${testimonial.name}-${idx}`}
                   className="w-[350px] backdrop-blur-lg bg-white/5 rounded-xl p-6 border border-white/10 transform transition-all duration-300 hover:scale-105 hover:bg-white/10"
                 >
                   <div className="flex mb-3">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className="text-amber-400 fill-amber-400"
-                      />
+                      <Star key={i} size={16} className="text-amber-400 fill-amber-400" />
                     ))}
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-2">

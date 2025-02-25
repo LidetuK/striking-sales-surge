@@ -9,7 +9,7 @@ import FAQ from "@/components/FAQ";
 import BonusSection from "@/components/BonusSection";
 import OrderForm from "@/components/OrderForm";
 import FinalCTA from "@/components/FinalCTA";
-
+import RushMe from "@/components/RushMe";
 import Review from "@/components/Review";
 import BookShowcase from "@/components/BookShowcase";
 import LimitedOffer from "@/components/LimitedOffer";
@@ -22,6 +22,7 @@ const Index = () => {
       <Hero />
       <Benefits />
       <Testimonials />
+      <RushMe />
       <OrderForm />
       <AuthorBio />
       <Countdown />
