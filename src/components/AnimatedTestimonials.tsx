@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { motion, useAnimationControls } from "framer-motion";
 
@@ -6,106 +6,131 @@ const testimonialSections = {
   "Marketing": [
     { name: "Nacima", rating: 5, title: "All in One", text: "Elevate Higher gave me a complete roadmap for marketing success. The strategies are practical and easy to apply." },
     { name: "Steve R.", rating: 5, title: "A Fresh Look at Marketing", text: "This book changed my approach to marketing. The case studies were particularly insightful." },
-    { name: "Abdul A.", rating: 5, title: "Mastering Modern Marketing", text: "The book covers everything, from branding to conversion. A must-read for serious marketers." },
-    { name: "Lina K.", rating: 5, title: "Transformative Guide", text: "I applied Elevate Higher's marketing tactics and saw immediate growth in my business." }
+    { name: "Abdul A.", rating: 5, title: "Mastering Modern Marketing", text: "The book covers everything, from branding to conversion. A must-read for serious marketers." }
   ],
   "Personal Success": [
-    { name: "Carly", rating: 5, title: "Life-Changing", text: "Elevate Higher helped me find purpose in my work." },
-    { name: "Inna", rating: 5, title: "A Book for Achievers", text: "I feel more motivated than ever!" },
-    { name: "Marek", rating: 5, title: "Step-by-Step Success", text: "Practical steps that actually work." },
-    { name: "Sophia A.", rating: 5, title: "Transformative Read", text: "This book shifted my mindset completely." }
+    { name: "Carly", rating: 5, title: "Life-Changing", text: "Elevate Higher helped me find purpose in my work and achieve greater success." },
+    { name: "Inna", rating: 5, title: "A Book for Achievers", text: "I feel more motivated than ever! The principles are transformative." },
+    { name: "Marek", rating: 5, title: "Step-by-Step Success", text: "Practical steps that actually work. I've seen remarkable progress." }
+  ],
+  "Business Growth": [
+    { name: "James K.", rating: 5, title: "Exceptional Value", text: "This transformed how I approach business strategy. The ROI has been incredible." },
+    { name: "Sarah M.", rating: 5, title: "Revolutionary Approach", text: "The business insights are gold. My company has grown 300% since implementing these strategies." },
+    { name: "Michael P.", rating: 5, title: "Business Essential", text: "Every entrepreneur needs this. The frameworks for scaling are invaluable." }
   ]
 };
 
-const AnimatedTestimonials = () => {
-  const controlsTop = useAnimationControls();
-  const controlsBottom = useAnimationControls();
+const TestimonialSlider = () => {
+  const controlsSection1 = useAnimationControls();
+  const controlsSection2 = useAnimationControls();
+  const controlsSection3 = useAnimationControls();
+  const [pausedSections, setPausedSections] = useState<number[]>([]);
   
-  const numTestimonials = Object.values(testimonialSections)[0].length; // Assume all sections have the same count
-  const baseDuration = 60;
-  const adjustedDuration = (numTestimonials / 3) * baseDuration;
-
-  useEffect(() => {
-    controlsTop.start({
-      x: "-100%", // Both move left
+  const startAnimation = async (control: any) => {
+    await control.start({
+      x: ["0%", "-50%"],
       transition: {
-        duration: adjustedDuration,
-        ease: "linear",
-        repeat: Infinity
-      }
+        x: {
+          duration: 45,
+          ease: "linear",
+          repeat: Infinity,
+        },
+      },
     });
-
-    controlsBottom.start({
-      x: "-100%", // Both move left
-      transition: {
-        duration: adjustedDuration,
-        ease: "linear",
-        repeat: Infinity, // Infinite loop for bottom section
-        repeatDelay: 0 // Ensure no pause between loops
-      }
-    });
-  }, []);
-
-  const handleMouseEnter = (controls) => {
-    controls.stop();
   };
 
-  const handleMouseLeave = (controls, direction) => {
-    controls.start({
-      x: direction,
-      transition: {
-        duration: adjustedDuration,
-        ease: "linear",
-        repeat: Infinity
+  useEffect(() => {
+    const controls = [controlsSection1, controlsSection2, controlsSection3];
+    controls.forEach((control, index) => {
+      if (!pausedSections.includes(index)) {
+        startAnimation(control);
       }
+    });
+  }, [controlsSection1, controlsSection2, controlsSection3, pausedSections]);
+
+  const handleMouseEnter = (sectionIndex: number) => {
+    setPausedSections((prev) => [...prev, sectionIndex]);
+    const currentX = document.querySelector(`#section-${sectionIndex}`)?.getBoundingClientRect().x || 0;
+    const controls = [controlsSection1, controlsSection2, controlsSection3];
+    
+    // Smoothly pause at the current position
+    controls[sectionIndex].start({
+      x: currentX,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    });
+  };
+
+  const handleMouseLeave = (sectionIndex: number) => {
+    setPausedSections((prev) => prev.filter(index => index !== sectionIndex));
+    const currentX = document.querySelector(`#section-${sectionIndex}`)?.getBoundingClientRect().x || 0;
+    const controls = [controlsSection1, controlsSection2, controlsSection3];
+    
+    // Resume animation with a smooth transition
+    controls[sectionIndex].start({
+      x: [currentX, "-50%"],
+      transition: {
+        x: {
+          duration: 45,
+          ease: "linear",
+          repeat: Infinity,
+        },
+      },
     });
   };
 
   return (
-    <section className="py-12 bg-[#121212] w-full overflow-hidden">
-      {Object.values(testimonialSections).map((testimonials, sectionIndex) => {
-        const controls = sectionIndex === 0 ? controlsTop : controlsBottom;
-        const direction = "-100%"; // Both sections move left
+    <div className="w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <h2 className="text-4xl font-bold text-white text-center mb-2">What People Are Saying</h2>
+        <p className="text-gray-400 text-center">Trusted by professionals worldwide</p>
+      </div>
 
-        return (
-          <div key={sectionIndex} className="mb-10">
-            <div className="relative w-full overflow-hidden">
-              <motion.div
-                className="flex w-max gap-4 px-4"
-                initial={{ x: "0%" }}
-                animate={controls}
-                transition={{ 
-                  duration: adjustedDuration,
-                  ease: "linear",
-                  repeat: Infinity
-                }}
-                onMouseEnter={() => handleMouseEnter(controls)}
-                onMouseLeave={() => handleMouseLeave(controls, direction)}
-              >
-                {[...testimonials, ...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
-                  <div
-                    key={idx}
-                    className="w-[320px] p-6 rounded-lg bg-[#1A1A1A] border border-gray-800 text-white flex flex-col"
-                  >
-                    <div className="flex mb-2">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      ))}
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">{testimonial.title}</h3>
-                    <p className="text-gray-300 mb-3 text-base leading-relaxed flex-grow">{testimonial.text}</p>
-                    <div className="pt-2 border-t border-gray-700">
-                      <p className="text-sm text-gray-400">{testimonial.name}</p>
-                    </div>
+      {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => (
+        <div key={sectionName} className="mb-12 last:mb-0">
+          <div className="relative overflow-hidden">
+            <motion.div
+              id={`section-${sectionIndex}`}
+              className="flex space-x-6 px-4"
+              animate={[controlsSection1, controlsSection2, controlsSection3][sectionIndex]}
+              initial={{ x: "0%" }}
+              style={{ width: "fit-content" }}
+              onMouseEnter={() => handleMouseEnter(sectionIndex)}
+              onMouseLeave={() => handleMouseLeave(sectionIndex)}
+            >
+              {[...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
+                <div
+                  key={`${testimonial.name}-${idx}`}
+                  className="w-[350px] backdrop-blur-lg bg-white/5 rounded-xl p-6 border border-white/10 transform transition-all duration-300 hover:scale-105 hover:bg-white/10"
+                >
+                  <div className="flex mb-3">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={16}
+                        className="text-amber-400 fill-amber-400"
+                      />
+                    ))}
                   </div>
-                ))}
-              </motion.div>
-            </div>
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    {testimonial.title}
+                  </h3>
+                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">
+                    {testimonial.text}
+                  </p>
+                  <div className="pt-3 border-t border-white/10">
+                    <p className="text-gray-400 text-sm">{testimonial.name}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
-        );
-      })}
-    </section>
+        </div>
+      ))}
+    </div>
   );
 };
 
-export default AnimatedTestimonials;
+export default TestimonialSlider;
