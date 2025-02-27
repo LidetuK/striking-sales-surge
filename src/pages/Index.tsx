@@ -14,6 +14,7 @@ import Review from "@/components/Review";
 import BookShowcase from "@/components/BookShowcase";
 import LimitedOffer from "@/components/LimitedOffer";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
+import ConsultationOffer from "@/components/ConsultationOffer";
 
 const Index = () => {
   return (
@@ -33,6 +34,7 @@ const Index = () => {
       <FAQ />
       <LimitedOffer />
       <FinalCTA />
+      <ConsultationOffer />
     </div>
   );
 };
