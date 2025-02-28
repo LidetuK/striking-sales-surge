@@ -56,6 +56,14 @@ const BookShowcase = () => {
 
         <p className="mt-6 text-lg font-bold">Warm regards,</p>
         <p className="text-xl font-bold text-yellow-600">RQ</p>
+       
+          <h3 className="text-3xl font-bold text-red-600">P.S.</h3>
+          <img 
+  src="/lovable-uploads/Screenshot_2025-02-28_231038-removebg-preview.png" 
+  alt="Signature" 
+  className="mx-auto" 
+  
+/>
       </div>
     </section>
   );

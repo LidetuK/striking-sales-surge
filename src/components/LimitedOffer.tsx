@@ -13,7 +13,7 @@ const LimitedOffer = () => {
 
         {/* Content */}
         <div className="mt-8 bg-white text-gray-900 p-8 rounded-lg shadow-lg">
-          <h3 className="text-3xl font-bold text-red-600">P.S.</h3>
+          <h3 className="text-3xl font-bold text-red-600"></h3>
           <p className="mt-4 text-lg leading-relaxed">
             Hey there! If you’ve skipped to the end, here’s the scoop:  
             I’m offering you a free physical copy of my 259-page bestselling book,  
@@ -52,12 +52,7 @@ const LimitedOffer = () => {
         </div>
 
         {/* Call-To-Action Button */}
-        <button
-          className="mt-8 bg-yellow-500 hover:bg-yellow-600 text-gray-900 text-lg px-12 py-6 font-bold uppercase rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
-          onClick={() => setIsModalOpen(true)}
-        >
-          Book One-to-One 📞
-        </button>
+        
 
         {/* Modal Popup */}
         {isModalOpen && (

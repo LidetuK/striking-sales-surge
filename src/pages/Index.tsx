@@ -14,6 +14,9 @@ import BookShowcase from "@/components/BookShowcase";
 import LimitedOffer from "@/components/LimitedOffer";
 import ConsultationOffer from "@/components/ConsultationOffer";
 import TestimonialSlider from "@/components/TestimonialSlider";
+import CallToAction from "@/components/CallToAction";
+import BookOne from "@/components/bookone";
+
 
 
 
@@ -29,12 +32,14 @@ const Index = () => {
       <AuthorBio />
       <Countdown />
       <TestimonialSlider />
+      <CallToAction />
       <Review/>
       <BonusSection />
       <BookShowcase />
-      <FAQ />
       <LimitedOffer />
       <FinalCTA />
+      <BookOne/>
+      <FAQ />
       <ConsultationOffer />
       
       

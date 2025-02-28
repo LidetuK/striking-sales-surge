@@ -14,29 +14,36 @@ const Hero = () => {
 
         {/* Main headline with structured alignment */}
         <div className="space-y-2">
+          <p className="text-6xl sm:text-7xl md:text-7xl font-bold leading-[1.3]">
+            GIVING AWAY 10,000 COPIES
+          </p>
+          <p className="text-6xl sm:text-7xl md:text-7xl font-bold leading-[1.3]">
+            OF HIS #1 BESTSELLING BOOK
+          </p>
+        </div>
+
+        {/* Alignment fix section */}
+        <div className="space-y-2 mt-6">
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-            GIVING AWAY 10,000 COPIES OF HIS #1
+            This Gesture Aims To Demonstrate The 
           </p>
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-          BESTSELLING BOOK This Gesture Aims To
+           Effectiveness of his '7 Secret Strategies
           </p>
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-            Demonstrate the Effectiveness of his
+           To Achieve Unprecedented Abundance 
           </p>
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-             '7 Secret Strategies to Achieve
+          
           </p>
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-            Unprecedented Abundance in
+          in Your Life' Simply to Prove His Point
           </p>
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-          Your Life' Simply to Prove 
+          
           </p>
           <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-          His Point That These
-          </p>
-          <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.3]">
-          Strategies WORK!
+         That These Strategies WORK!
           </p>
         </div>
 
