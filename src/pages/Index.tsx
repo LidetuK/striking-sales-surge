@@ -1,4 +1,3 @@
-
 import React from "react";
 import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
@@ -9,17 +8,19 @@ import FAQ from "@/components/FAQ";
 import BonusSection from "@/components/BonusSection";
 import OrderForm from "@/components/OrderForm";
 import FinalCTA from "@/components/FinalCTA";
-import RushMe from "@/components/RushMe";
 import Review from "@/components/Review";
+import RushMe from "@/components/RushMe";
 import BookShowcase from "@/components/BookShowcase";
 import LimitedOffer from "@/components/LimitedOffer";
-import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 import ConsultationOffer from "@/components/ConsultationOffer";
+import TestimonialSlider from "@/components/TestimonialSlider";
+
+
+
 
 const Index = () => {
   return (
     <div className="relative">
-     
       <Hero />
       <Benefits />
       <Testimonials />
@@ -27,7 +28,7 @@ const Index = () => {
       <OrderForm />
       <AuthorBio />
       <Countdown />
-      <AnimatedTestimonials />
+      <TestimonialSlider />
       <Review/>
       <BonusSection />
       <BookShowcase />
@@ -35,6 +36,8 @@ const Index = () => {
       <LimitedOffer />
       <FinalCTA />
       <ConsultationOffer />
+      
+      
     </div>
   );
 };
