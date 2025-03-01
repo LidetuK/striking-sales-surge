@@ -4,13 +4,15 @@ const BookShowcase = () => {
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Title */}
         <h1 className="text-7xl font-extrabold uppercase tracking-wide leading-tight text-red-600">
-          UNLEASH YOUR BEST SELF, BEGIN NOW.
+          UNLEASH YOUR BEST SELF. BEGIN NOW.
         </h1>
 
         {/* Book Introduction */}
         <p className="mt-6 text-lg leading-relaxed">
           I am thrilled to introduce you to my book,{" "}
-          <span className="font-bold uppercase">ELEVATE HIGH’ER: CHANGE YOUR LIFE. BE GR8R THAN. EARN MORE.</span> 
+          <span className="font-bold uppercase">
+            ELEVATE HIGHER: CHANGE YOUR LIFE. BE GR8R THAN. EARN MORE.
+          </span>{" "}
           This book is designed to help you enhance seven key areas of your life:{" "}
           <strong>Spiritual, Wellness, Knowledge, Relationship, Actions, Financial, and Lifestyle.</strong> 
           By focusing on these areas, you can achieve more abundance and fulfillment than ever before.
@@ -18,13 +20,13 @@ const BookShowcase = () => {
 
         {/* Availability Notice */}
         <div className="mt-8 bg-white text-gray-900 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold">Limited-Time Offer</h2>
+          <p className="text-lg font-bold uppercase">
+            DUE TO THE HIGH DEMAND FOR THIS TRANSFORMATIVE BOOK, IT MAY TAKE A FEW SECONDS TO LOAD AFTER YOU PLACE YOUR ORDER HERE ONLINE.
+          </p>
           <p className="mt-4 text-lg">
-            Due to the <strong>high demand</strong> for this transformative book, 
-            it may take a few seconds to load after you place your order. 
-            Your <span className="text-indigo-700 font-bold">FREE COPY</span> 
-            may take <strong>14-25 business days</strong> to be delivered to your doorstep. 
-            We kindly ask for your patience during this process.
+            YOUR <span className="text-indigo-700 font-bold">FREE COPY</span> 
+            MAY TAKE <strong>14-25 BUSINESS DAYS</strong> TO BE DELIVERED TO YOUR DOORSTEP.  
+            I KINDLY ASK FOR YOUR PATIENCE DURING THIS PROCESS…
           </p>
         </div>
 
@@ -32,13 +34,14 @@ const BookShowcase = () => {
         <div className="mt-8">
           <p className="text-lg">
             As a special offer, this book is available to you <strong>for free</strong>. 
-            Just cover the shipping and handling costs, and we’ll send it to you anywhere in the world.
+            All I ask is that you cover the shipping and handling costs, and we will send it to you anywhere in the world.
           </p>
           <p className="mt-4 text-lg">
-            Prefer a digital version? Get the audiobook, Kindle, iBooks, or PDF for a small fee.
+            If you prefer to listen to the audiobook or read it on your Kindle, iBooks, or as a PDF, these digital versions are also available for a small fee. 
+            Simply enter your details below to access these options.
           </p>
 
-          {/* Updated Button */}
+          {/* Button */}
           <button
             className="bg-red-600 hover:bg-red-700 text-white text-2xl px-16 py-8 mt-8 font-bold uppercase rounded-xl transform transition-all duration-300 hover:scale-110 shadow-xl"
             onClick={() =>
@@ -51,19 +54,18 @@ const BookShowcase = () => {
 
         {/* Closing Message */}
         <p className="mt-12 italic opacity-80 text-lg">
-          Thank you for taking the time to read this page. I look forward to helping you elevate your life.
+          Thank you for taking the time to read this page. I look forward to hearing from you soon and helping you embark on this journey to elevate your life.
         </p>
 
         <p className="mt-6 text-lg font-bold">Warm regards,</p>
         <p className="text-xl font-bold text-yellow-600">RQ</p>
-       
-          <h3 className="text-3xl font-bold text-red-600">P.S.</h3>
-          <img 
+        <img 
   src="/lovable-uploads/Screenshot_2025-02-28_231038-removebg-preview.png" 
   alt="Signature" 
   className="mx-auto" 
   
 />
+        <h3 className="text-3xl font-bold text-red-600">P.S.</h3>
       </div>
     </section>
   );
