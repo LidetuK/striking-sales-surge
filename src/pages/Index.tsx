@@ -14,7 +14,6 @@ import RushMe from "@/components/RushMe";
 import BookShowcase from "@/components/BookShowcase";
 import LimitedOffer from "@/components/LimitedOffer";
 import ConsultationOffer from "@/components/ConsultationOffer";
-import TestimonialSlider from "@/components/TestimonialSlider";
 import CallToAction from "@/components/CallToAction";
 import BookOne from "@/components/BookOne";
 import Elevate from "@/components/Elevate";
@@ -33,7 +32,6 @@ const Index = () => {
       <OrderForm />
       <CallToAction />
       <AnimatedTestimonials />
-      <TestimonialSlider />
       <Ready />
       <BookShowcase />
       <Review />
