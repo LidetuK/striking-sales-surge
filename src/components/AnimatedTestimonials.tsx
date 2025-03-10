@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Star } from "lucide-react";
-import { motion, useAnimationControls } from "framer-motion";
 
 const testimonialSections = {
   "Marketing": [
@@ -35,40 +34,46 @@ const AnimatedTestimonials = () => {
         <p className="text-center text-gray-400 mb-8">Hear from readers who have transformed their lives with Elevate Higher</p>
       </div>
 
-      {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => (
-        <div key={sectionName} className="mb-8 last:mb-0">
-          <div className="group relative overflow-hidden w-full">
-            <div className="marquee-container overflow-hidden w-full">
-              <div 
-                className={`flex space-x-4 ${sectionIndex % 2 === 0 ? 'animate-scroll-left' : 'animate-scroll-right'} group-hover:pause`}
-                style={{ width: "fit-content" }}
-              >
-                {[...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
-                  <div
-                    key={`${testimonial.name}-${idx}`}
-                    className="w-[280px] backdrop-blur-lg bg-white/5 rounded-xl p-5 border border-white/10 hover:bg-white/10 transition-colors"
-                  >
-                    <div className="flex mb-2">
-                      {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
-                      ))}
+      {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => {
+        // Calculate how many copies of testimonials we need to fill the screen
+        // We'll use 3 copies to ensure full coverage across all screen sizes
+        const repeatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials];
+        
+        return (
+          <div key={sectionName} className="mb-8 last:mb-0">
+            <div className="group relative overflow-hidden w-full">
+              <div className="marquee-container overflow-hidden w-full">
+                <div 
+                  className={`flex space-x-4 ${sectionIndex % 2 === 0 ? 'animate-scroll-left' : 'animate-scroll-right'} group-hover:pause`}
+                  style={{ width: "fit-content" }}
+                >
+                  {repeatedTestimonials.map((testimonial, idx) => (
+                    <div
+                      key={`${testimonial.name}-${idx}`}
+                      className="w-[280px] backdrop-blur-lg bg-white/5 rounded-xl p-5 border border-white/10 hover:bg-white/10 transition-colors"
+                    >
+                      <div className="flex mb-2">
+                        {Array.from({ length: testimonial.rating }).map((_, i) => (
+                          <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
+                        ))}
+                      </div>
+                      <h3 className="text-lg font-semibold text-white mb-2">
+                        {testimonial.title}
+                      </h3>
+                      <p className="text-gray-300 mb-3 text-sm leading-relaxed">
+                        {testimonial.text}
+                      </p>
+                      <div className="pt-2 border-t border-white/10">
+                        <p className="text-gray-400 text-sm">{testimonial.name}</p>
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2">
-                      {testimonial.title}
-                    </h3>
-                    <p className="text-gray-300 mb-3 text-sm leading-relaxed">
-                      {testimonial.text}
-                    </p>
-                    <div className="pt-2 border-t border-white/10">
-                      <p className="text-gray-400 text-sm">{testimonial.name}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

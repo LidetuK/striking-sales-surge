@@ -89,7 +89,7 @@
   animation-delay: 2s;
 }
 
-/* New styles for the animated testimonials */
+/* Improved animated testimonials scrolling */
 @keyframes scrollLeft {
   from { transform: translateX(0); }
   to { transform: translateX(-100%); }
