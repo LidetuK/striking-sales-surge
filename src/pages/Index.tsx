@@ -1,3 +1,4 @@
+
 import React from "react";
 import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
@@ -19,15 +20,11 @@ import BookOne from "@/components/BookOne";
 import Elevate from "@/components/Elevate";
 import Ready from "@/components/Ready";
 
-
-
-
-
 const Index = () => {
   return (
     <div className="relative">
       <Hero />
-      <Elevate/>
+      <Elevate />
       <Countdown />
       <Benefits />
       <AuthorBio />
@@ -35,26 +32,16 @@ const Index = () => {
       <OrderForm />
       <CallToAction />
       <TestimonialSlider />
-      <Ready/>
+      <Ready />
       <BookShowcase />
-      <Review/>
+      <Review />
       <Testimonials />
-      <BookOne/>
-      
-      
-      
-      
-      
-    
+      <BookOne />
       <BonusSection />
-      
       <LimitedOffer />
       <FinalCTA />
-      <BookOne/>
       <FAQ />
       <ConsultationOffer />
-      
-      
     </div>
   );
 };
