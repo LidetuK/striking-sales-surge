@@ -19,6 +19,7 @@ import CallToAction from "@/components/CallToAction";
 import BookOne from "@/components/BookOne";
 import Elevate from "@/components/Elevate";
 import Ready from "@/components/Ready";
+import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 
 const Index = () => {
   return (
@@ -31,6 +32,7 @@ const Index = () => {
       <RushMe />
       <OrderForm />
       <CallToAction />
+      <AnimatedTestimonials />
       <TestimonialSlider />
       <Ready />
       <BookShowcase />
