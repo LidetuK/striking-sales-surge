@@ -36,7 +36,7 @@ const AnimatedTestimonials = () => {
 
       {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => {
         // Calculate how many copies of testimonials we need to fill the screen
-        // We'll use 3 copies to ensure full coverage across all screen sizes
+        // We'll use 5 copies to ensure full coverage across all screen sizes
         const repeatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials];
         
         return (
@@ -44,7 +44,7 @@ const AnimatedTestimonials = () => {
             <div className="group relative overflow-hidden w-full">
               <div className="marquee-container overflow-hidden w-full">
                 <div 
-                  className={`flex space-x-4 ${sectionIndex % 2 === 0 ? 'animate-scroll-left' : 'animate-scroll-right'} group-hover:pause`}
+                  className="flex space-x-4 animate-scroll-left group-hover:pause"
                   style={{ width: "fit-content" }}
                 >
                   {repeatedTestimonials.map((testimonial, idx) => (

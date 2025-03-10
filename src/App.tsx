@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -27,6 +28,13 @@ const App = () => {
     if (!popupShown) {
       window.addEventListener("scroll", handleScroll);
     }
+
+    // Add meta tag to remove Lovable branding
+    document.title = "Elevate Higher";
+    const favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    favicon.href = '/lovable-uploads/81eeda96-0e0a-4a6c-9bc1-911431328b1d.png';
+    document.head.appendChild(favicon);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
