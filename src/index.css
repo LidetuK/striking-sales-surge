@@ -96,7 +96,7 @@
 }
 
 .animate-scroll-left {
-  animation: scrollLeft 90s linear infinite; /* Slowed down from 60s to 90s */
+  animation: scrollLeft 120s linear infinite; /* Slowed down significantly for smoother scrolling */
 }
 
 .pause {

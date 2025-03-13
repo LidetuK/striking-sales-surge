@@ -35,9 +35,18 @@ const AnimatedTestimonials = () => {
       </div>
 
       {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => {
-        // Calculate how many copies of testimonials we need to fill the screen
-        // We'll use 5 copies to ensure full coverage across all screen sizes
-        const repeatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials];
+        // Create a continuous loop by duplicating testimonials multiple times
+        // This ensures there's never an empty space in the scroll
+        const repeatedTestimonials = [
+          ...testimonials, 
+          ...testimonials, 
+          ...testimonials, 
+          ...testimonials, 
+          ...testimonials,
+          ...testimonials,
+          ...testimonials,
+          ...testimonials
+        ];
         
         return (
           <div key={sectionName} className="mb-8 last:mb-0">
@@ -45,12 +54,15 @@ const AnimatedTestimonials = () => {
               <div className="marquee-container overflow-hidden w-full">
                 <div 
                   className="flex space-x-4 animate-scroll-left group-hover:pause"
-                  style={{ width: "fit-content" }}
+                  style={{ 
+                    width: "fit-content",
+                    animation: "scrollLeft 120s linear infinite" // Slowed down even more
+                  }}
                 >
                   {repeatedTestimonials.map((testimonial, idx) => (
                     <div
                       key={`${testimonial.name}-${idx}`}
-                      className="w-[280px] backdrop-blur-lg bg-white/5 rounded-xl p-5 border border-white/10 hover:bg-white/10 transition-colors"
+                      className="w-[280px] flex-shrink-0 backdrop-blur-lg bg-white/5 rounded-xl p-5 border border-white/10 hover:bg-white/10 transition-colors"
                     >
                       <div className="flex mb-2">
                         {Array.from({ length: testimonial.rating }).map((_, i) => (
