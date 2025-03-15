@@ -8,7 +8,7 @@ const CallToAction = () => {
     <section className="py-10 md:py-20 bg-[#FFB700] text-black text-center">
       <div className="max-w-4xl mx-auto px-4 md:px-6">
         {/* Section Title */}
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold uppercase tracking-wide leading-tight text-red-600">
+        <h1 className="text-2xl sm:text-3xl md:text-6xl font-extrabold uppercase tracking-wide leading-tight text-red-600">
           ELEVATE HIGHER WITH YOUR FREE COPY AND EXCLUSIVE BONUSES!
         </h1>
   

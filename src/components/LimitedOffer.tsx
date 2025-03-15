@@ -7,7 +7,7 @@ const LimitedOffer = () => {
     <section className="py-20 bg-gray-900 text-white text-center">
       <div className="max-w-5xl mx-auto px-6">
         {/* Section Heading */}
-        <h1 className="text-5xl font-extrabold uppercase tracking-wide leading-tight">
+        <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight">
           🎁 Don't Miss This Opportunity <br /> to Transform Your Business
         </h1>
 
@@ -15,15 +15,15 @@ const LimitedOffer = () => {
         <div className="mt-8 bg-white text-gray-900 p-8 rounded-lg shadow-lg">
           <h3 className="text-3xl font-bold text-red-600"></h3>
           <p className="mt-4 text-lg leading-relaxed">
-            Hey there! If you’ve skipped to the end, here’s the scoop:  
-            I’m offering you a free physical copy of my 259-page bestselling book,  
-            <span className="font-bold"> ELEVATE HIGH’ER.</span>  
+            Hey there! If you've skipped to the end, here's the scoop:  
+            I'm offering you a free physical copy of my 259-page bestselling book,  
+            <span className="font-bold"> ELEVATE HIGH'ER.</span>  
             This book outlines the principles and actionable steps to transform your life.
           </p>
 
           <p className="mt-6 text-lg">
             All I ask is that you cover the small shipping and handling fee.  
-            Why free? Because I’m confident you’ll love it and be eager to support my future books.
+            Why free? Because I'm confident you'll love it and be eager to support my future books.
           </p>
 
           {/* Urgency Section */}
@@ -32,10 +32,10 @@ const LimitedOffer = () => {
               🚨 This is a Limited-Time Offer 🚨
             </p>
             <p className="mt-2">
-              I’ve only printed a few thousand copies, and once they’re gone,  
+              I've only printed a few thousand copies, and once they're gone,  
               it might take a while before we print more.
             </p>
-            <p className="mt-2 font-bold uppercase">So don’t wait—hit the order button now! 🚀</p>
+            <p className="mt-2 font-bold uppercase">So don't wait—hit the order button now! 🚀</p>
           </div>
 
           {/* Trust & Guarantee */}
@@ -45,8 +45,8 @@ const LimitedOffer = () => {
               No hidden subscriptions. No monthly fees. Just the book, delivered to you.  
             </p>
             <p className="mt-2">
-              And if for any reason you don’t love it, I’ll refund your shipping cost—no questions asked.  
-              You don’t even have to return the book. That’s how confident I am!
+              And if for any reason you don't love it, I'll refund your shipping cost—no questions asked.  
+              You don't even have to return the book. That's how confident I am!
             </p>
           </div>
         </div>

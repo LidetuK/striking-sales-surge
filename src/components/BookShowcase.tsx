@@ -1,9 +1,10 @@
+
 const BookShowcase = () => {
   return (
     <section className="py-20 bg-[#FFB700] text-black text-center">
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Title */}
-        <h1 className="text-7xl font-extrabold uppercase tracking-wide leading-tight text-red-600">
+        <h1 className="text-4xl md:text-7xl font-extrabold uppercase tracking-wide leading-tight text-red-600">
           UNLEASH YOUR BEST SELF. BEGIN NOW.
         </h1>
 
@@ -43,7 +44,7 @@ const BookShowcase = () => {
 
           {/* Button */}
           <button
-            className="bg-red-600 hover:bg-red-700 text-white text-2xl px-16 py-8 mt-8 font-bold uppercase rounded-xl transform transition-all duration-300 hover:scale-110 shadow-xl"
+            className="bg-red-600 hover:bg-red-700 text-white text-xl md:text-2xl px-8 md:px-16 py-6 md:py-8 mt-8 font-bold uppercase rounded-xl transform transition-all duration-300 hover:scale-110 shadow-xl"
             onClick={() =>
               document.getElementById("order")?.scrollIntoView({ behavior: "smooth" })
             }
@@ -60,11 +61,10 @@ const BookShowcase = () => {
         <p className="mt-6 text-lg font-bold">Warm regards,</p>
         <p className="text-xl font-bold text-yellow-600">RQ</p>
         <img 
-  src="/lovable-uploads/Screenshot_2025-02-28_231038-removebg-preview.png" 
-  alt="Signature" 
-  className="mx-auto" 
-  
-/>
+          src="/lovable-uploads/Screenshot_2025-02-28_231038-removebg-preview.png" 
+          alt="Signature" 
+          className="mx-auto" 
+        />
         <h3 className="text-3xl font-bold text-red-600">P.S.</h3>
       </div>
     </section>

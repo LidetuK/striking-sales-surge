@@ -1,3 +1,4 @@
+
 const testimonials = [
     [
       { user: "@k****", text: "Reading your book now. I’m mind-blown by it! It’s literally an exact blueprint for digital marketing, which is exactly what I needed..." },
@@ -35,9 +36,9 @@ const testimonials = [
     return (
       <section className="py-20 bg-white text-center">
         {/* Headline */}
-<h2 className="text-5xl md:text-6xl font-extrabold leading-snug uppercase text-red-600 text-center mb-10">
-  See Why Thousands of People <br /> Are Raving About This Book...
-</h2>
+        <h2 className="text-3xl md:text-6xl font-extrabold leading-snug uppercase text-red-600 text-center mb-10">
+          See Why Thousands of People <br /> Are Raving About This Book...
+        </h2>
 
 
   
@@ -45,7 +46,7 @@ const testimonials = [
         <div className="flex justify-center mb-10">
           <img
             src="/lovable-uploads/8ebd4889-d01b-480e-942a-42139c5c9167.png"
-            alt="ELEVATE HIGH’ER book reviews"
+            alt="ELEVATE HIGH'ER book reviews"
             className="w-full max-w-4xl rounded-lg shadow-lg"
           />
         </div>
@@ -73,4 +74,3 @@ const testimonials = [
   };
   
   export default Review;
-  
