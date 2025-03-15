@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import BookPopup from "@/components/ui/BookPopup"; // Import the popup
+import BookPopup from "@/components/ui/BookPopup";
 
 const queryClient = new QueryClient();
 
@@ -28,13 +28,6 @@ const App = () => {
     if (!popupShown) {
       window.addEventListener("scroll", handleScroll);
     }
-
-    // Add meta tag to remove Lovable branding
-    document.title = "Elevate Higher";
-    const favicon = document.createElement('link');
-    favicon.rel = 'icon';
-    favicon.href = '/lovable-uploads/81eeda96-0e0a-4a6c-9bc1-911431328b1d.png';
-    document.head.appendChild(favicon);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
