@@ -1,7 +1,9 @@
 
 import { useState, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Countdown = () => {
+  const isMobile = useIsMobile();
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
@@ -28,9 +30,9 @@ const Countdown = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 glass-card p-4 rounded-lg shadow-lg z-40 bg-white/95">
-      <p className="text-sm font-semibold text-primary mb-2">Limited Time Offer</p>
-      <div className="flex gap-2 text-2xl font-bold">
+    <div className={`fixed bottom-2 md:bottom-4 right-2 md:right-4 glass-card p-3 md:p-4 rounded-lg shadow-lg z-40 bg-white/95 ${isMobile ? 'max-w-[150px]' : ''}`}>
+      <p className="text-xs md:text-sm font-semibold text-primary mb-1 md:mb-2">Limited Time Offer</p>
+      <div className="flex gap-1 md:gap-2 text-xl md:text-2xl font-bold">
         <div>{String(timeLeft.hours).padStart(2, '0')}:</div>
         <div>{String(timeLeft.minutes).padStart(2, '0')}:</div>
         <div>{String(timeLeft.seconds).padStart(2, '0')}</div>
