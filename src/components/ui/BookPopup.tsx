@@ -49,7 +49,7 @@ const BookPopup: React.FC<BookPopupProps> = ({ isOpen, onClose }) => {
         <p className="text-center mt-2 text-gray-700">
           Send me your address and I'll rush a <b>FREE copy</b> of my brand new physical book to your doorstep, ASAP!
         </p>
-        <img src="/lovable-uploads/download (2).png" alt="Sell Like Crazy" className="w-full my-4 rounded-lg shadow-md" />
+        <img src="/lovable-uploads/111.png" alt="Sell Like Crazy" className="w-full my-4 rounded-lg shadow-md" />
         <button className="w-full bg-red-500 text-white py-3 px-4 rounded-lg text-lg font-bold hover:bg-red-600 transition-all">
           RUSH ME A FREE COPY
         </button>

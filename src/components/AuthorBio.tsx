@@ -12,8 +12,8 @@ const AuthorBio = () => {
         <div className="relative flex justify-center mt-10">
           {/* Book Image */}
           <img
-            src="/lovable-uploads/15aa6d11-958b-440d-bd79-b489673932a1.png"
-            alt="Sell Like Crazy Book"
+            src="/lovable-uploads/111.png"
+            alt="Elevate Higher"
             className="rounded-lg shadow-2xl w-full max-w-5xl mx-auto"
           />
          

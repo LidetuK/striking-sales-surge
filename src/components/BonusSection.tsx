@@ -3,27 +3,27 @@ import { Gift, Zap, Target, Users } from "lucide-react";
 const bonuses = [
   {
     icon: <Gift className="w-12 h-12 text-primary" />,
-    title: "The High-Ticket Sales Blueprint",
-    value: "$997 VALUE",
-    description: "Learn how to close high-ticket deals with confidence and ease."
+    title: "The Elevation Mindset Blueprint",
+    value: "$1,997 VALUE",
+    description: "Unlock the secrets to developing a success-driven mindset and achieving your full potential."
   },
   {
     icon: <Zap className="w-12 h-12 text-primary" />,
-    title: "Email Marketing Mastery",
-    value: "$497 VALUE",
-    description: "Convert leads into loyal customers with proven email sequences."
+    title: "Peak Performance Habits",
+    value: "$1,497 VALUE",
+    description: "Master daily routines and habits that empower you to stay focused, productive, and motivated."
   },
   {
     icon: <Target className="w-12 h-12 text-primary" />,
-    title: "Advanced Lead Generation",
-    value: "$697 VALUE",
-    description: "Generate qualified leads on autopilot using cutting-edge strategies."
+    title: "The Growth Acceleration Guide",
+    value: "$1,697 VALUE",
+    description: "Discover proven strategies to accelerate personal and professional growth for lasting success."
   },
   {
     icon: <Users className="w-12 h-12 text-primary" />,
-    title: "Sales Team Training",
+    title: "Confidence & Resilience Masterclass",
     value: "$1,997 VALUE",
-    description: "Transform your sales team into a high-performing revenue machine."
+    description: "Build unshakable confidence and resilience to overcome setbacks and reach new heights in life."
   }
 ];
 
@@ -33,10 +33,10 @@ const BonusSection = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-5xl font-bold mb-4 text-red-600">
-            FREE Bonuses (Worth $4,188)
+            FREE Bonuses (Worth $7,188)
           </h2>
           <p className="text-xl text-gray-600">
-            Order today and get instant access to these exclusive bonuses
+          Order today and get instant access to these exclusive bonuses!
           </p>
         </div>
         

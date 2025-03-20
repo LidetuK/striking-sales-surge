@@ -1,4 +1,3 @@
-
 import {
   Accordion,
   AccordionContent,
@@ -67,10 +66,16 @@ const FAQ = () => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4">
-      <h2 className="text-4xl md:text-6xl font-extrabold leading-tight uppercase text-red-600 text-center mb-12">
+      <h2 className="text-6xl md:text-4xl font-extrabold leading-tight uppercase text-red-600 text-center mb-12">
   FIND OUT WHY READERS EVERYWHERE <br /> ARE LOVING THIS BOOK
 </h2>
-
+<div className="flex justify-center mb-10">
+          <img
+            src="/lovable-uploads/333.png"
+            alt="ELEVATE HIGH’ER book reviews"
+            className="w-full max-w-4xl rounded-lg shadow-lg"
+          />
+        </div>
         <h2 className="text-xl md:text-4xl font-extrabold leading-tight uppercase text-red-600 text-center mb-6">
   Frequently Asked Questions
 </h2>
