@@ -65,12 +65,12 @@ const FAQ = () => {
   return (
     <section className="py-10 md:py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight uppercase text-red-600 text-center mb-8 md:mb-12 mobile-text-container">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight uppercase text-red-600 text-center mb-6 md:mb-8">
           FIND OUT WHY READERS EVERYWHERE <br className="hidden sm:block" /> ARE LOVING THIS BOOK
         </h2>
         <div className="flex justify-center mb-6 md:mb-10">
           <img
-            src="/lovable-uploads/333.png"
+            src="/333.png"
             alt="ELEVATE HIGH'ER book reviews"
             className="w-full max-w-4xl rounded-lg shadow-lg"
           />

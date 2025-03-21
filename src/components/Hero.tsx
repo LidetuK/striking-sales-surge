@@ -49,7 +49,7 @@ const Hero = () => {
 
         <div className="relative flex items-center justify-center mt-4 md:mt-6">
           <img 
-            src="/lovable-uploads/222.png" 
+            src="/222.png" 
             alt="Main Feature" 
             className="rounded-lg shadow-xl w-[95%] md:w-[85%] lg:w-[80%]"
           />
@@ -70,7 +70,7 @@ const Hero = () => {
 
         <div className="mt-6 md:mt-8 flex flex-wrap justify-center items-center gap-4 md:gap-6 opacity-80 mb-16 md:mb-32">
           <img 
-            src="/lovable-uploads/Screenshot_2025-02-24_162919-removebg-preview.png" 
+            src="/Screenshot_2025-02-24_162919-removebg-preview.png" 
             alt="Forbes" 
             className="h-20 md:h-40"
           />

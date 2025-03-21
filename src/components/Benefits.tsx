@@ -1,3 +1,4 @@
+
 const audience = [
   "Aspiring Entrepreneurs: Individuals looking to start their own business and seeking guidance on how to achieve success.",
   "Business Professionals: Those aiming to enhance their career, improve their skills, and achieve greater professional success.",
@@ -18,28 +19,28 @@ const Benefits = () => {
     <section className="py-20 bg-white text-center">
       <div className="max-w-6xl mx-auto px-4">
         {/* Title */}
-        <h2 className="text-7xl font-bold text-red-600 mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-red-600 mb-2 md:mb-4">
           WHO NEEDS THIS?
         </h2>
 
         {/* Subtitle */}
-        <h3 className="text-5xl font-semibold text-gray-700 mb-8">
+        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-gray-700 mb-4 md:mb-8 px-2">
           7 SECRET STRATEGIES TO ACHIEVE UNPRECEDENTED ABUNDANCE IN YOUR LIFE.
         </h3>
 
         {/* Image */}
-        <div className="flex justify-center mb-16">
-          <img src="/lovable-uploads/Screenshot 2025-02-25 194914.png" alt="Who Needs This?" className="w-auto max-w-full h-auto" />
+        <div className="flex justify-center mb-8 md:mb-16">
+          <img src="/Screenshot 2025-02-25 194914.png" alt="Who Needs This?" className="w-auto max-w-full h-auto" />
         </div>
 
         {/* Audience List */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8">
           {audience.map((item, idx) => (
             <div 
               key={idx} 
-              className="bg-gray-100 p-8 rounded-lg shadow-md transition duration-300 hover:shadow-2xl hover:scale-110 flex items-center text-xl font-semibold border-l-4 border-red-500">
-              <span className="text-red-600 text-3xl mr-4">✔️</span>
-              <p className="text-gray-800 flex-1">{item}</p>
+              className="bg-gray-100 p-4 md:p-8 rounded-lg shadow-md transition duration-300 hover:shadow-xl hover:scale-105 md:hover:scale-110 flex items-center text-base md:text-xl font-semibold border-l-4 border-red-500">
+              <span className="text-red-600 text-xl md:text-3xl mr-2 md:mr-4 flex-shrink-0">✔️</span>
+              <p className="text-gray-800 flex-1 text-left">{item}</p>
             </div>
           ))}
         </div>
