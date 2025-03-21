@@ -1,3 +1,4 @@
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -46,6 +47,22 @@
 
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .mobile-text-container {
+    @apply px-4 sm:px-6 md:px-8;
+  }
+  
+  .responsive-heading {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+  }
+  
+  .responsive-subheading {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold;
+  }
+  
+  .responsive-text {
+    @apply text-sm sm:text-base md:text-lg;
   }
 }
 
@@ -132,6 +149,16 @@
   .mobile-spacing {
     padding: 0.75rem;
   }
+  
+  h1, h2 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  .accordion-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -142,5 +169,14 @@
   @keyframes scrollLeft {
     from { transform: translateX(0); }
     to { transform: translateX(-100%); }
+  }
+  
+  .reduce-padding {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .stack-on-mobile {
+    flex-direction: column;
   }
 }

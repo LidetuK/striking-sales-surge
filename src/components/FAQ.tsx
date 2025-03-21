@@ -1,3 +1,4 @@
+
 import {
   Accordion,
   AccordionContent,
@@ -64,29 +65,29 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-10 md:py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4">
-      <h2 className="text-6xl md:text-4xl font-extrabold leading-tight uppercase text-red-600 text-center mb-12">
-  FIND OUT WHY READERS EVERYWHERE <br /> ARE LOVING THIS BOOK
-</h2>
-<div className="flex justify-center mb-10">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight uppercase text-red-600 text-center mb-8 md:mb-12">
+          FIND OUT WHY READERS EVERYWHERE <br className="hidden sm:block" /> ARE LOVING THIS BOOK
+        </h2>
+        <div className="flex justify-center mb-6 md:mb-10">
           <img
             src="/lovable-uploads/333.png"
-            alt="ELEVATE HIGH’ER book reviews"
+            alt="ELEVATE HIGH'ER book reviews"
             className="w-full max-w-4xl rounded-lg shadow-lg"
           />
         </div>
-        <h2 className="text-xl md:text-4xl font-extrabold leading-tight uppercase text-red-600 text-center mb-6">
-  Frequently Asked Questions
-</h2>
+        <h2 className="text-xl sm:text-2xl md:text-4xl font-extrabold leading-tight uppercase text-red-600 text-center mb-4 md:mb-6">
+          Frequently Asked Questions
+        </h2>
 
-        <Accordion type="single" collapsible>
+        <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, idx) => (
-            <AccordionItem key={idx} value={`item-${idx}`}>
-              <AccordionTrigger className="text-lg font-medium">
+            <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-gray-200">
+              <AccordionTrigger className="text-base sm:text-lg font-medium py-4 px-1">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-gray-600">
+              <AccordionContent className="text-sm sm:text-base text-gray-600 px-1 pb-4">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
