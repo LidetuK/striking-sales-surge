@@ -1,3 +1,4 @@
+
 const testimonials = [
   {
     name: "Malik J.",
@@ -45,48 +46,48 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-4">
+    <section className="py-10 md:py-20 bg-white px-4">
+      <div className="max-w-5xl mx-auto">
         {/* First row with 3 testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           {testimonials.slice(0, 3).map((testimonial, idx) => (
-            <div key={idx} className="text-center">
+            <div key={idx} className="text-center mb-8 md:mb-0">
               <div className="relative inline-block">
                 <img 
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-gray-300"
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto object-cover border-2 border-gray-300"
                 />
                 <span className="absolute bottom-0 right-0 bg-white border border-white rounded-full p-1">
-                  <img src="/lovable-uploads/blue.avif" alt="Verified" className="w-5 h-5" />
+                  <img src="/lovable-uploads/blue.avif" alt="Verified" className="w-4 h-4 md:w-5 md:h-5" />
                 </span>
               </div>
-              <p className="text-blue-400 text-sm mt-2">{testimonial.followers}</p>
-              <p className="text-gray-800 italic mb-4">"{testimonial.text}"</p>
-              <h4 className="font-bold text-red-600">{testimonial.name}</h4>
-              <p className="text-sm text-gray-600">{testimonial.role}</p>
+              <p className="text-blue-400 text-xs md:text-sm mt-2">{testimonial.followers}</p>
+              <p className="text-gray-800 italic mb-3 md:mb-4 text-sm md:text-base">{testimonial.text}</p>
+              <h4 className="font-bold text-red-600 text-sm md:text-base">{testimonial.name}</h4>
+              <p className="text-xs md:text-sm text-gray-600">{testimonial.role}</p>
             </div>
           ))}
         </div>
         
-        {/* Second row with 3 testimonials instead of 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+        {/* Second row with 3 testimonials */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-0 md:mt-10">
           {testimonials.slice(3).map((testimonial, idx) => (
             <div key={idx} className="text-center">
               <div className="relative inline-block">
                 <img 
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-gray-300"
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto object-cover border-2 border-gray-300"
                 />
                 <span className="absolute bottom-0 right-0 bg-white border border-white rounded-full p-1">
-                  <img src="/lovable-uploads/blue.avif" alt="Verified" className="w-5 h-5" />
+                  <img src="/lovable-uploads/blue.avif" alt="Verified" className="w-4 h-4 md:w-5 md:h-5" />
                 </span>
               </div>
-              <p className="text-blue-400 text-sm mt-2">{testimonial.followers}</p>
-              <p className="text-gray-800 italic mb-4">"{testimonial.text}"</p>
-              <h4 className="font-bold text-red-600">{testimonial.name}</h4>
-              <p className="text-sm text-gray-600">{testimonial.role}</p>
+              <p className="text-blue-400 text-xs md:text-sm mt-2">{testimonial.followers}</p>
+              <p className="text-gray-800 italic mb-3 md:mb-4 text-sm md:text-base">{testimonial.text}</p>
+              <h4 className="font-bold text-red-600 text-sm md:text-base">{testimonial.name}</h4>
+              <p className="text-xs md:text-sm text-gray-600">{testimonial.role}</p>
             </div>
           ))}
         </div>
