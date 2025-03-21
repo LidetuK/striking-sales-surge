@@ -159,6 +159,19 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+  
+  /* FAQ specific mobile styles */
+  [data-radix-accordion-trigger] {
+    text-align: left;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    line-height: 1.4;
+  }
+  
+  [data-radix-accordion-content] {
+    padding: 0.5rem;
+    line-height: 1.5;
+  }
 }
 
 @media (max-width: 768px) {

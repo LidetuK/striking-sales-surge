@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     question: "What exactly am I getting?",
-    answer: "When you claim your free copy of ELEVATE HIGH’ER: CHANGE YOUR LIFE. BE GR8R THAN. EARN MORE. you will receive a physical book packed with actionable strategies to enhance your life in seven key areas. Additionally, if you opt for the digital or audiobook versions, you'll get access to these formats for a small fee. The book is free; you only need to cover the shipping and handling costs."
+    answer: "When you claim your free copy of ELEVATE HIGH'ER: CHANGE YOUR LIFE. BE GR8R THAN. EARN MORE. you will receive a physical book packed with actionable strategies to enhance your life in seven key areas. Additionally, if you opt for the digital or audiobook versions, you'll get access to these formats for a small fee. The book is free; you only need to cover the shipping and handling costs."
   },
   {
     question: "Do you have any success stories?",
@@ -36,7 +36,7 @@ const faqs = [
     answer: "Once you place your order and cover the shipping and handling costs, your book will be processed and shipped promptly. Delivery times may vary depending on your location, but you can typically expect to receive your book within 14-25 business days."
   },
   {
-    question: "Is ELEVATE HIGH’ER covered by a 100% money-back guarantee?",
+    question: "Is ELEVATE HIGH'ER covered by a 100% money-back guarantee?",
     answer: "Yes, it is! We are confident that you will find immense value in this book. However, if for any reason you are not satisfied, we offer a 100% money-back guarantee. Simply contact our customer service team, and we will process your refund, no questions asked."
   },
   {
@@ -45,29 +45,27 @@ const faqs = [
   },
   {
     question: "Can I get a bulk order for my team or organization?",
-    answer: "Yes, bulk orders are available! If you’re interested in ordering multiple copies for your team, organization, or event, please contact our customer service team for special pricing and arrangements. We’re happy to help you spread the message of personal growth and development."
+    answer: "Yes, bulk orders are available! If you're interested in ordering multiple copies for your team, organization, or event, please contact our customer service team for special pricing and arrangements. We're happy to help you spread the message of personal growth and development."
   },
   {
     question: "What if I have questions or need support after receiving the book?",
-    answer: "We’re here to help! If you have any questions or need support after receiving your book, please reach out to our customer service team. We’re committed to ensuring you have a positive experience and can fully benefit from the content of the book."
+    answer: "We're here to help! If you have any questions or need support after receiving your book, please reach out to our customer service team. We're committed to ensuring you have a positive experience and can fully benefit from the content of the book."
   },
   {
     question: "Are there any additional resources or tools provided with the book?",
-    answer: "We’re here to help! If you have any questions or need support after receiving your book, please reach out to our customer service team. We’re committed to ensuring you have a positive experience and can fully benefit from the content of the book."
+    answer: "Yes, along with the book, you'll get access to exclusive online resources, including worksheets, templates, and bonus content that complements the strategies discussed in the book. These additional tools are designed to help you implement the concepts effectively and achieve faster results."
   },
   {
     question: "How can I stay updated on new content and future releases?",
-    answer: "To stay updated on new content, future releases, and special offers, you can subscribe to our newsletter. Simply enter your email address on our website, and you’ll receive regular updates and valuable insights directly to your inbox."
+    answer: "To stay updated on new content, future releases, and special offers, you can subscribe to our newsletter. Simply enter your email address on our website, and you'll receive regular updates and valuable insights directly to your inbox."
   }
-
-
 ];
 
 const FAQ = () => {
   return (
     <section className="py-10 md:py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight uppercase text-red-600 text-center mb-8 md:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight uppercase text-red-600 text-center mb-8 md:mb-12 mobile-text-container">
           FIND OUT WHY READERS EVERYWHERE <br className="hidden sm:block" /> ARE LOVING THIS BOOK
         </h2>
         <div className="flex justify-center mb-6 md:mb-10">
@@ -77,14 +75,14 @@ const FAQ = () => {
             className="w-full max-w-4xl rounded-lg shadow-lg"
           />
         </div>
-        <h2 className="text-xl sm:text-2xl md:text-4xl font-extrabold leading-tight uppercase text-red-600 text-center mb-4 md:mb-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight uppercase text-red-600 text-center mb-4 md:mb-6">
           Frequently Asked Questions
         </h2>
 
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, idx) => (
             <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-gray-200">
-              <AccordionTrigger className="text-base sm:text-lg font-medium py-4 px-1">
+              <AccordionTrigger className="text-base sm:text-lg font-medium py-4 px-1 text-left">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-sm sm:text-base text-gray-600 px-1 pb-4">
