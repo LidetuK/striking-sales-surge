@@ -9,11 +9,11 @@ const OrderForm = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Book Image & Description */}
           <div className="text-center md:text-left">
-            <img 
-              src="/lovable-uploads/Elevate Higher Book Mockup 5.jpg" 
-              alt="Your Book Title" 
-              className="mx-auto md:mx-0 w-full max-w-sm md:max-w-md h-auto shadow-lg rounded-lg"
-            />
+          <img 
+  src="/lovable-uploads/Elevate Higher Book Mockup 5.jpg" 
+  alt="Your Book Title" 
+  className="mx-auto md:mx-0 w-full max-w-3xl h-[600px] object-cover shadow-lg rounded-lg"
+/>
             <h3 className="text-xl md:text-2xl font-semibold mt-4 md:mt-6">
               Discover the Secrets to <span className="text-primary">Success</span>
             </h3>

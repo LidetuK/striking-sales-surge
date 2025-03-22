@@ -70,7 +70,7 @@ const Hero = () => {
 
         <div className="mt-6 md:mt-8 flex flex-wrap justify-center items-center gap-4 md:gap-6 opacity-80 mb-16 md:mb-32">
           <img 
-            src="/Screenshot_2025-02-24_162919-removebg-preview.png" 
+            src="lovable-uploads/Screenshot_2025-02-24_162919-removebg-preview.png" 
             alt="Forbes" 
             className="h-20 md:h-40"
           />

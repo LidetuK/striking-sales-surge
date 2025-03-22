@@ -9,11 +9,20 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+
+  // ✅ Ensure the correct base path for deployment
+  base: mode === "development" ? "/" : "/empowerment/self-development-guide/elevate-higher-the-book/",
+
+  build: {
+    outDir: "dist",  // Default output directory
+    assetsDir: "assets", // Ensures assets load correctly
+  },
+
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -43,7 +43,7 @@ const BookOne = () => {
 
               {/* Embedded Form */}
               <iframe
-                src="https://reskque-booking-buddy.vercel.app/"
+                src="https://bookingsssss.vercel.app/"
                 className="w-full h-[600px] rounded-lg"
               ></iframe>
             </div>
