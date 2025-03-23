@@ -44,6 +44,8 @@ const OrderForm = () => {
         return;
       }
 
+      console.log("Submitting form data:", formData);
+      
       // Call the Supabase Edge Function
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
@@ -59,6 +61,8 @@ const OrderForm = () => {
         },
       });
 
+      console.log("Response from Edge Function:", { data, error });
+
       if (error) {
         console.error('Error creating checkout session:', error);
         toast.error("Something went wrong. Please try again.");
@@ -68,8 +72,10 @@ const OrderForm = () => {
 
       // Redirect to Stripe Checkout
       if (data?.url) {
+        console.log("Redirecting to Stripe checkout:", data.url);
         window.location.href = data.url;
       } else {
+        console.error("No checkout URL returned:", data);
         toast.error("Unable to process your order. Please try again.");
       }
     } catch (error) {

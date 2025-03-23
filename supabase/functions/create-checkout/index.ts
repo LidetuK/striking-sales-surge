@@ -16,6 +16,8 @@ serve(async (req) => {
   try {
     const { price, customerEmail, customerName, shippingAddress } = await req.json();
     
+    console.log('Creating checkout session with:', { customerEmail, customerName, shippingAddress });
+    
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -44,6 +46,8 @@ serve(async (req) => {
       cancel_url: `${req.headers.get('origin')}#order`,
     });
 
+    console.log('Checkout session created:', session.id);
+    
     return new Response(JSON.stringify({ url: session.url }), {
       status: 200,
       headers: {
@@ -52,6 +56,7 @@ serve(async (req) => {
       },
     });
   } catch (error) {
+    console.error('Error creating checkout session:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 400,
       headers: {
