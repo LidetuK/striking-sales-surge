@@ -75,8 +75,20 @@ const OrderForm = () => {
       // Redirect to Stripe Checkout
       if (data?.url) {
         console.log("Redirecting to Stripe checkout:", data.url);
-        // Use direct assignment for more reliable redirect
-        window.location.assign(data.url);
+        
+        // Use window.open for a more reliable redirect in a new tab
+        window.open(data.url, '_blank');
+        
+        // If window.open is blocked, fallback to direct assignment
+        setTimeout(() => {
+          if (!document.hasFocus()) {
+            toast.info("Checkout opened in a new tab");
+          } else {
+            toast.info("Redirecting to checkout...");
+            window.location.href = data.url;
+          }
+        }, 500);
+        
       } else {
         console.error("No checkout URL returned:", data);
         toast.error("Unable to process your order. Please try again.");

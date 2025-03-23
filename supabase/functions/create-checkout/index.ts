@@ -3,7 +3,10 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 import Stripe from 'https://esm.sh/stripe@12.18.0';
 
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
+// Use the provided Stripe secret key
+const stripeSecretKey = Deno.env.get('STRIPE_SECRET_KEY') || 'sk_test_51Gx2sVCNjyaQ14tCkUFXzPWfxUlklnrdpAuCFIJdjOOYGXtRckpGVf2SVvONUq3z7N81TqWWBlv2K0u91pY1yVvr0059r3ugyr';
+
+const stripe = new Stripe(stripeSecretKey, {
   apiVersion: '2023-10-16',
 });
 
@@ -17,6 +20,9 @@ serve(async (req) => {
     const { price, customerEmail, customerName, shippingAddress } = await req.json();
     
     console.log('Creating checkout session with:', { customerEmail, customerName, shippingAddress });
+    
+    const origin = req.headers.get('origin') || 'http://localhost:5173';
+    console.log('Request origin:', origin);
     
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -42,8 +48,8 @@ serve(async (req) => {
         customer_name: customerName,
         shipping_address: JSON.stringify(shippingAddress),
       },
-      success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get('origin')}#order`,
+      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}#order`,
     });
 
     console.log('Checkout session created:', session.id);
