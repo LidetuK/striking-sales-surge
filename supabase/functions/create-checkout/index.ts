@@ -47,8 +47,12 @@ serve(async (req) => {
     });
 
     console.log('Checkout session created:', session.id);
+    console.log('Checkout session URL:', session.url);
     
-    return new Response(JSON.stringify({ url: session.url }), {
+    return new Response(JSON.stringify({ 
+      url: session.url,
+      sessionId: session.id
+    }), {
       status: 200,
       headers: {
         ...corsHeaders,
