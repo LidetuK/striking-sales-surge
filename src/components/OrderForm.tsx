@@ -15,9 +15,14 @@ interface ShippingAddress {
   zipCode: string;
 }
 
+type ProductType = "digital" | "physical";
+type Region = "us_canada" | "europe" | "other";
+
 const OrderForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showBookPopup, setShowBookPopup] = useState(false);
+  const [productType, setProductType] = useState<ProductType>("digital");
+  const [region, setRegion] = useState<Region>("us_canada");
   const [formData, setFormData] = useState<ShippingAddress & { email: string }>({
     firstName: "",
     lastName: "",
@@ -33,25 +38,54 @@ const OrderForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (name === "productType") {
+      setProductType(value as ProductType);
+    } else if (name === "region") {
+      setRegion(value as Region);
+    }
+  };
+
+  const getShippingCost = () => {
+    if (productType === "digital") return 0;
+    return region === "us_canada" ? 14.97 : 14.99;
+  };
+
+  const getProductPrice = () => {
+    return productType === "digital" ? 9.99 : 29.99;
+  };
+
+  const getTotalPrice = () => {
+    return getProductPrice() + getShippingCost();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
       // Validate form data
-      if (!formData.firstName || !formData.lastName || !formData.email || 
-          !formData.address || !formData.city || !formData.state || !formData.zipCode) {
+      if (!formData.firstName || !formData.lastName || !formData.email) {
         toast.error("Please fill out all required fields");
         setIsLoading(false);
         return;
       }
 
-      console.log("Submitting form data:", formData);
+      // Additional validation for physical orders
+      if (productType === "physical" && (!formData.address || !formData.city || !formData.state || !formData.zipCode)) {
+        toast.error("Please fill out all shipping details");
+        setIsLoading(false);
+        return;
+      }
+
+      console.log("Submitting form data:", { productType, region, ...formData });
       
       // Call the Supabase Edge Function
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
-          price: 995, // $9.95 in cents
+          productType,
+          region,
           customerEmail: formData.email,
           customerName: `${formData.firstName} ${formData.lastName}`,
           shippingAddress: {
@@ -118,20 +152,65 @@ const OrderForm = () => {
               </h3>
               <p className="text-gray-600 mt-2 md:mt-4 text-sm md:text-base">
                 This book will transform your mindset and help you achieve greatness.
-                Grab your <strong>FREE copy</strong> today—just cover shipping & handling!
+                Choose your preferred format below!
               </p>
             </div>
 
             {/* Order Form */}
             <div className="bg-white shadow-xl rounded-lg p-4 md:p-8">
               <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4">
-                Claim Your FREE Copy Now
+                Order Your Copy Now
               </h2>
               <p className="text-lg md:text-xl text-gray-600 text-center mb-4 md:mb-6">
-                Just Cover Shipping & Handling
+                Choose Your Preferred Format
               </p>
 
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                {/* Product Type Selection */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className={`border rounded-lg p-4 text-center cursor-pointer transition-all ${
+                    productType === "digital" ? "border-primary bg-primary/10" : "border-gray-200"
+                  }`} onClick={() => setProductType("digital")}>
+                    <h3 className="font-semibold mb-2">Digital Copy</h3>
+                    <p className="text-lg font-bold text-primary">$9.99</p>
+                    <p className="text-xs text-gray-500 mt-1">Instant access</p>
+                  </div>
+                  <div className={`border rounded-lg p-4 text-center cursor-pointer transition-all ${
+                    productType === "physical" ? "border-primary bg-primary/10" : "border-gray-200"
+                  }`} onClick={() => setProductType("physical")}>
+                    <h3 className="font-semibold mb-2">Physical Book</h3>
+                    <p className="text-lg font-bold text-primary">$29.99</p>
+                    <p className="text-xs text-gray-500 mt-1">+ shipping</p>
+                  </div>
+                </div>
+
+                {/* Invisible select for form submission */}
+                <select 
+                  name="productType" 
+                  value={productType}
+                  onChange={handleSelectChange}
+                  className="hidden"
+                >
+                  <option value="digital">Digital Copy</option>
+                  <option value="physical">Physical Copy</option>
+                </select>
+
+                {/* Region Selection (only for physical) */}
+                {productType === "physical" && (
+                  <div>
+                    <label className="block text-sm font-medium mb-1 md:mb-2">Shipping Region</label>
+                    <select 
+                      name="region" 
+                      value={region}
+                      onChange={handleSelectChange}
+                      className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
+                    >
+                      <option value="us_canada">USA & Canada (${getShippingCost()})</option>
+                      <option value="europe">Europe (${getShippingCost()})</option>
+                    </select>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium mb-1 md:mb-2">First Name</label>
@@ -169,51 +248,75 @@ const OrderForm = () => {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-1 md:mb-2">Shipping Address</label>
-                  <input 
-                    type="text" 
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
-                    required
-                  />
-                </div>
+                {/* Shipping Address Fields (only for physical) */}
+                {productType === "physical" && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 md:mb-2">Shipping Address</label>
+                      <input 
+                        type="text" 
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
+                        required
+                      />
+                    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-1 md:mb-2">City</label>
-                    <input 
-                      type="text" 
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                      className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
-                      required
-                    />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-1 md:mb-2">City</label>
+                        <input 
+                          type="text" 
+                          name="city"
+                          value={formData.city}
+                          onChange={handleChange}
+                          className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1 md:mb-2">State/Province</label>
+                        <input 
+                          type="text" 
+                          name="state"
+                          value={formData.state}
+                          onChange={handleChange}
+                          className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1 md:mb-2">ZIP/Postal Code</label>
+                        <input 
+                          type="text" 
+                          name="zipCode"
+                          value={formData.zipCode}
+                          onChange={handleChange}
+                          className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Order Summary */}
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">Order Summary</h3>
+                  <div className="flex justify-between">
+                    <span>{productType === "digital" ? "Digital Copy" : "Physical Book"}</span>
+                    <span>${getProductPrice().toFixed(2)}</span>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 md:mb-2">State</label>
-                    <input 
-                      type="text" 
-                      name="state"
-                      value={formData.state}
-                      onChange={handleChange}
-                      className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 md:mb-2">ZIP Code</label>
-                    <input 
-                      type="text" 
-                      name="zipCode"
-                      value={formData.zipCode}
-                      onChange={handleChange}
-                      className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
-                      required
-                    />
+                  {productType === "physical" && (
+                    <div className="flex justify-between mt-1">
+                      <span>Shipping & Handling</span>
+                      <span>${getShippingCost().toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="border-t my-2 pt-2 flex justify-between font-bold">
+                    <span>Total</span>
+                    <span>${getTotalPrice().toFixed(2)}</span>
                   </div>
                 </div>
 
@@ -239,11 +342,15 @@ const OrderForm = () => {
                   disabled={isLoading}
                   className="w-full py-3 md:py-4 text-base md:text-lg font-bold bg-primary hover:bg-primary-hover rounded-lg shadow-md"
                 >
-                  {isLoading ? "Processing..." : "YES! RUSH ME MY FREE COPY"}
+                  {isLoading ? "Processing..." : productType === "digital" 
+                    ? "GET INSTANT ACCESS NOW" 
+                    : "ORDER MY BOOK NOW"}
                 </Button>
 
                 <p className="text-center text-xs md:text-sm text-gray-600 mt-2 md:mt-4">
-                  By clicking above, you agree to pay shipping & handling of $9.95
+                  {productType === "digital" 
+                    ? "You'll receive an email with your digital copy immediately after payment" 
+                    : "Your book will be shipped to the address above after payment"}
                 </p>
               </form>
             </div>
