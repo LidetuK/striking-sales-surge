@@ -78,6 +78,70 @@ serve(async (req) => {
       }
       
       requiresShipping = true;
+    } else if (productType === 'swaggerism') {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Swaggerism My Religion - Physical Copy (Pre-Order)',
+            description: 'Pre-order of Swaggerism My Religion book (Ships July 15)',
+          },
+          unit_amount: 2599, // $25.99 in cents
+        },
+        quantity: 1,
+      });
+      
+      // Add shipping costs based on region
+      let shippingCost = 0;
+      if (region === 'us_canada') {
+        // USA & Canada: Shipping $11.99 + handling $2.98 = $14.97
+        shippingCost = 1497;
+      } else if (region === 'europe') {
+        // Europe: Shipping (including handling) is $14.99
+        shippingCost = 1499;
+      }
+      
+      if (shippingCost > 0) {
+        lineItems.push({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Shipping & Handling',
+              description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
+            },
+            unit_amount: shippingCost,
+          },
+          quantity: 1,
+        });
+      }
+      
+      requiresShipping = true;
+    } else if (productType === 'bundle') {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Book Bundle: Elevate Higher + Swaggerism My Religion',
+            description: 'Physical copies of both Elevate Higher and Swaggerism My Religion (Pre-Order)',
+          },
+          unit_amount: 5398, // $53.98 in cents
+        },
+        quantity: 1,
+      });
+      
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'FREE Shipping & Handling',
+            description: 'Complimentary shipping for the bundle',
+          },
+          unit_amount: 0,
+        },
+        quantity: 1,
+      });
+      
+      requiresShipping = true;
     }
     
     const sessionConfig = {

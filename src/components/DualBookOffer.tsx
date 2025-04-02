@@ -38,7 +38,7 @@ const DualBookOffer = () => {
   ];
 
   const handleScrollToCheckout = () => {
-    const checkoutElement = document.getElementById('claim');
+    const checkoutElement = document.getElementById('order');
     if (checkoutElement) {
       checkoutElement.scrollIntoView({ behavior: 'smooth' });
     }
@@ -47,7 +47,7 @@ const DualBookOffer = () => {
   return (
     <section 
       id="dual-book-section"
-      className="py-16 md:py-24 bg-gradient-to-br from-theme-purple-light to-theme-purple-dark text-white"
+      className="py-16 md:py-24 bg-gradient-to-br from-purple-900 to-indigo-900 text-white"
     >
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12 md:mb-16">
@@ -100,9 +100,9 @@ const DualBookOffer = () => {
               </ul>
               <Button 
                 onClick={handleScrollToCheckout}
-                className="w-full mt-4 bg-white text-theme-purple-dark hover:bg-white/90"
+                className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
               >
-                Claim Your Copy
+                Order Now
               </Button>
             </div>
           </motion.div>
@@ -125,8 +125,8 @@ const DualBookOffer = () => {
               <div className="text-center">
                 <h3 className="text-xl md:text-2xl font-bold mb-2">Swaggerism My Religion</h3>
                 <p className="text-white/80 text-sm md:text-base">Discover the art of confidence and authentic self-expression to transform your life.</p>
-                <div className="mt-2 text-white/70 text-sm">Individual price: <span className="line-through">$39.99</span> <span className="text-white font-bold">$29.99</span></div>
-                <div className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#DC2626] text-white">
+                <div className="mt-2 text-white/70 text-sm">Individual price: <span className="line-through">$35.99</span> <span className="text-white font-bold">$25.99</span></div>
+                <div className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-600 text-white">
                   <Calendar className="h-3 w-3 mr-1" />
                   PRE-ORDER (Launches July 15)
                 </div>
@@ -149,9 +149,9 @@ const DualBookOffer = () => {
               </ul>
               <Button 
                 onClick={handleScrollToCheckout}
-                className="w-full mt-4 bg-[#DC2626] hover:bg-[#B91C1C] text-white"
+                className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
               >
-                PRE-ORDER (Launches July 15)
+                Pre-Order Now
               </Button>
             </div>
           </motion.div>
@@ -162,9 +162,9 @@ const DualBookOffer = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white/20 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-2xl border border-white/30 relative overflow-hidden"
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-2xl border border-white/30 relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 bg-[#DC2626] text-white py-1 px-4 font-bold text-sm">
+          <div className="absolute top-0 right-0 bg-green-600 text-white py-1 px-4 font-bold text-sm">
             BEST VALUE
           </div>
           
@@ -185,8 +185,9 @@ const DualBookOffer = () => {
               <div className="mb-6">
                 <div className="flex items-baseline mb-2">
                   <span className="text-xl">Bundle Price:</span>
+                  <span className="line-through text-white/70 ml-2">$59.98</span>
                   <span className="text-3xl font-bold ml-2">$53.98</span>
-                  <span className="ml-2 text-sm bg-green-500 text-white px-2 py-1 rounded">SAVE 10%</span>
+                  <span className="ml-2 text-sm bg-green-600 text-white px-2 py-1 rounded">SAVE 10%</span>
                 </div>
                 <p className="text-sm text-white/80">
                   <Package className="inline h-4 w-4 mr-1" /> 
@@ -199,8 +200,8 @@ const DualBookOffer = () => {
               </div>
               
               <button
-                onClick={() => window.location.href = "#claim"}
-                className="bg-[#DC2626] hover:bg-[#B91C1C] text-white text-lg px-8 py-4 font-bold uppercase rounded-lg flex items-center justify-center w-full md:w-auto transition-all duration-300 hover:scale-105 shadow-xl"
+                onClick={handleScrollToCheckout}
+                className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-4 font-bold uppercase rounded-lg flex items-center justify-center w-full md:w-auto transition-all duration-300 hover:scale-105 shadow-xl"
               >
                 Get Both Books
                 <ArrowRight className="ml-2 h-5 w-5" />

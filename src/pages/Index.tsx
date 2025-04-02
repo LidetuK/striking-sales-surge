@@ -20,6 +20,7 @@ import Elevate from "@/components/Elevate";
 import Ready from "@/components/Ready";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 import DualBookOffer from "@/components/DualBookOffer";
+import SwaggerismPromo from "@/components/SwaggerismPromo";
 
 const Index = () => {
   return (
@@ -34,6 +35,7 @@ const Index = () => {
       <CallToAction />
       <AnimatedTestimonials />
       <DualBookOffer/>
+      <SwaggerismPromo />
       <Ready />
       <BookShowcase />
       <Review />

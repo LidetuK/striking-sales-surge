@@ -15,7 +15,7 @@ interface ShippingAddress {
   zipCode: string;
 }
 
-type ProductType = "digital" | "physical";
+type ProductType = "digital" | "physical" | "swaggerism" | "bundle";
 type Region = "us_canada" | "europe" | "other";
 
 const OrderForm = () => {
@@ -49,15 +49,42 @@ const OrderForm = () => {
 
   const getShippingCost = () => {
     if (productType === "digital") return 0;
+    if (productType === "bundle") return 0; // Free shipping for bundle
     return region === "us_canada" ? 14.97 : 14.99;
   };
 
   const getProductPrice = () => {
-    return productType === "digital" ? 9.99 : 29.99;
+    switch (productType) {
+      case "digital":
+        return 9.99;
+      case "physical":
+        return 29.99;
+      case "swaggerism":
+        return 25.99;
+      case "bundle":
+        return 53.98;
+      default:
+        return 9.99;
+    }
   };
 
   const getTotalPrice = () => {
     return getProductPrice() + getShippingCost();
+  };
+
+  const getProductName = () => {
+    switch (productType) {
+      case "digital":
+        return "Elevate Higher - Digital Copy";
+      case "physical":
+        return "Elevate Higher - Physical Book";
+      case "swaggerism":
+        return "Swaggerism My Religion - Physical Book (Pre-Order)";
+      case "bundle":
+        return "Book Bundle: Elevate Higher + Swaggerism My Religion";
+      default:
+        return "Elevate Higher";
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,7 +100,7 @@ const OrderForm = () => {
       }
 
       // Additional validation for physical orders
-      if (productType === "physical" && (!formData.address || !formData.city || !formData.state || !formData.zipCode)) {
+      if (productType !== "digital" && (!formData.address || !formData.city || !formData.state || !formData.zipCode)) {
         toast.error("Please fill out all shipping details");
         setIsLoading(false);
         return;
@@ -143,16 +170,19 @@ const OrderForm = () => {
             {/* Book Image & Description */}
             <div className="text-center md:text-left">
               <img 
-                src="/lovable-uploads/Elevate Higher Book Mockup 5.jpg" 
-                alt="Your Book Title" 
+                src={productType === "swaggerism" ? "/2222222222.png" : 
+                     productType === "bundle" ? "/lovable-uploads/Screenshot_2025-02-28_231038-removebg-preview.png" : 
+                     "/lovable-uploads/Elevate Higher Book Mockup 5.jpg"} 
+                alt={getProductName()}
                 className="mx-auto md:mx-0 w-full max-w-3xl h-[600px] object-cover shadow-lg rounded-lg"
               />
               <h3 className="text-xl md:text-2xl font-semibold mt-4 md:mt-6">
                 Discover the Secrets to <span className="text-primary">Success</span>
               </h3>
               <p className="text-gray-600 mt-2 md:mt-4 text-sm md:text-base">
-                This book will transform your mindset and help you achieve greatness.
-                Choose your preferred format below!
+                {productType === "bundle" 
+                  ? "Transform your life with our complete book collection. Choose your preferred option below!"
+                  : "This book will transform your mindset and help you achieve greatness. Choose your preferred format below!"}
               </p>
             </div>
 
@@ -162,25 +192,51 @@ const OrderForm = () => {
                 Order Your Copy Now
               </h2>
               <p className="text-lg md:text-xl text-gray-600 text-center mb-4 md:mb-6">
-                Choose Your Preferred Format
+                Choose Your Preferred Option
               </p>
 
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 {/* Product Type Selection */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 mb-2">
                   <div className={`border rounded-lg p-4 text-center cursor-pointer transition-all ${
                     productType === "digital" ? "border-primary bg-primary/10" : "border-gray-200"
                   }`} onClick={() => setProductType("digital")}>
                     <h3 className="font-semibold mb-2">Digital Copy</h3>
                     <p className="text-lg font-bold text-primary">$9.99</p>
-                    <p className="text-xs text-gray-500 mt-1">Instant access</p>
+                    <p className="text-xs text-gray-500 mt-1">Elevate Higher</p>
                   </div>
+                  
                   <div className={`border rounded-lg p-4 text-center cursor-pointer transition-all ${
                     productType === "physical" ? "border-primary bg-primary/10" : "border-gray-200"
                   }`} onClick={() => setProductType("physical")}>
                     <h3 className="font-semibold mb-2">Physical Book</h3>
                     <p className="text-lg font-bold text-primary">$29.99</p>
-                    <p className="text-xs text-gray-500 mt-1">+ shipping</p>
+                    <p className="text-xs text-gray-500 mt-1">Elevate Higher</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className={`border rounded-lg p-4 text-center cursor-pointer transition-all ${
+                    productType === "swaggerism" ? "border-primary bg-primary/10" : "border-gray-200"
+                  }`} onClick={() => setProductType("swaggerism")}>
+                    <h3 className="font-semibold mb-2">Swaggerism</h3>
+                    <div>
+                      <span className="text-sm line-through text-gray-400 mr-1">$35.99</span>
+                      <span className="text-lg font-bold text-primary">$25.99</span>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">Pre-Order (July 15)</p>
+                  </div>
+                  
+                  <div className={`border-2 rounded-lg p-4 text-center cursor-pointer transition-all ${
+                    productType === "bundle" ? "border-green-500 bg-green-50" : "border-gray-200"
+                  }`} onClick={() => setProductType("bundle")}>
+                    <h3 className="font-semibold mb-1">Book Bundle</h3>
+                    <div>
+                      <span className="text-sm line-through text-gray-400 mr-1">$59.98</span>
+                      <span className="text-lg font-bold text-green-600">$53.98</span>
+                    </div>
+                    <p className="text-xs text-green-600 font-medium mt-1">FREE SHIPPING</p>
+                    <div className="mt-1 text-xs bg-green-600 text-white rounded-full py-0.5 px-2 inline-block">SAVE 10%</div>
                   </div>
                 </div>
 
@@ -193,10 +249,12 @@ const OrderForm = () => {
                 >
                   <option value="digital">Digital Copy</option>
                   <option value="physical">Physical Copy</option>
+                  <option value="swaggerism">Swaggerism Pre-Order</option>
+                  <option value="bundle">Book Bundle</option>
                 </select>
 
-                {/* Region Selection (only for physical) */}
-                {productType === "physical" && (
+                {/* Region Selection (only for physical but not bundle) */}
+                {(productType === "physical" || productType === "swaggerism") && (
                   <div>
                     <label className="block text-sm font-medium mb-1 md:mb-2">Shipping Region</label>
                     <select 
@@ -211,6 +269,7 @@ const OrderForm = () => {
                   </div>
                 )}
 
+                {/* Customer Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium mb-1 md:mb-2">First Name</label>
@@ -248,8 +307,8 @@ const OrderForm = () => {
                   />
                 </div>
 
-                {/* Shipping Address Fields (only for physical) */}
-                {productType === "physical" && (
+                {/* Shipping Address Fields (only for physical products) */}
+                {productType !== "digital" && (
                   <>
                     <div>
                       <label className="block text-sm font-medium mb-1 md:mb-2">Shipping Address</label>
@@ -305,13 +364,19 @@ const OrderForm = () => {
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h3 className="font-semibold mb-2">Order Summary</h3>
                   <div className="flex justify-between">
-                    <span>{productType === "digital" ? "Digital Copy" : "Physical Book"}</span>
+                    <span>{getProductName()}</span>
                     <span>${getProductPrice().toFixed(2)}</span>
                   </div>
-                  {productType === "physical" && (
+                  {(productType === "physical" || productType === "swaggerism") && (
                     <div className="flex justify-between mt-1">
                       <span>Shipping & Handling</span>
                       <span>${getShippingCost().toFixed(2)}</span>
+                    </div>
+                  )}
+                  {productType === "bundle" && (
+                    <div className="flex justify-between mt-1 text-green-600 font-medium">
+                      <span>Shipping & Handling</span>
+                      <span>FREE</span>
                     </div>
                   )}
                   <div className="border-t my-2 pt-2 flex justify-between font-bold">
@@ -340,16 +405,26 @@ const OrderForm = () => {
                 <Button 
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 md:py-4 text-base md:text-lg font-bold bg-primary hover:bg-primary-hover rounded-lg shadow-md"
+                  className={`w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-lg shadow-md ${
+                    productType === "bundle" 
+                      ? "bg-green-600 hover:bg-green-700 text-white" 
+                      : "bg-primary hover:bg-primary-hover text-white"
+                  }`}
                 >
-                  {isLoading ? "Processing..." : productType === "digital" 
-                    ? "GET INSTANT ACCESS NOW" 
-                    : "ORDER MY BOOK NOW"}
+                  {isLoading ? "Processing..." : 
+                   productType === "digital" ? "GET INSTANT ACCESS NOW" :
+                   productType === "swaggerism" ? "PRE-ORDER NOW" :
+                   productType === "bundle" ? "GET BOTH BOOKS NOW" :
+                   "ORDER MY BOOK NOW"}
                 </Button>
 
                 <p className="text-center text-xs md:text-sm text-gray-600 mt-2 md:mt-4">
                   {productType === "digital" 
                     ? "You'll receive an email with your digital copy immediately after payment" 
+                    : productType === "swaggerism"
+                    ? "Your pre-order will ship on July 15th, after payment is processed"
+                    : productType === "bundle"
+                    ? "Elevate Higher ships immediately; Swaggerism pre-order ships July 15th"
                     : "Your book will be shipped to the address above after payment"}
                 </p>
               </form>
