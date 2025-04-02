@@ -1,10 +1,11 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Lock, CreditCard, Shield } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import BookPopup from "./ui/BookPopup";
+import BookCoverPopup from "./ui/BookCoverPopup";
 
 interface ShippingAddress {
   firstName: string;
@@ -17,12 +18,15 @@ interface ShippingAddress {
 
 type ProductType = "digital" | "physical" | "swaggerism" | "bundle";
 type Region = "us_canada" | "europe" | "other";
+type BookCover = "softcover" | "hardcover";
 
 const OrderForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showBookPopup, setShowBookPopup] = useState(false);
+  const [showCoverPopup, setShowCoverPopup] = useState(false);
   const [productType, setProductType] = useState<ProductType>("digital");
   const [region, setRegion] = useState<Region>("us_canada");
+  const [bookCover, setBookCover] = useState<BookCover>("softcover");
   const [formData, setFormData] = useState<ShippingAddress & { email: string }>({
     firstName: "",
     lastName: "",
@@ -32,6 +36,51 @@ const OrderForm = () => {
     state: "",
     zipCode: "",
   });
+  const [freeSwaggerism, setFreeSwaggerism] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    // Check if there's an active free claim
+    const storedClaimTime = localStorage.getItem('swaggerismClaimTime');
+    if (storedClaimTime && localStorage.getItem('swaggerismFreeOffer') === 'true') {
+      const claimTime = parseInt(storedClaimTime);
+      const now = new Date().getTime();
+      const elapsedSeconds = Math.floor((now - claimTime) / 1000);
+      
+      // If less than 5 minutes have passed since claiming
+      if (elapsedSeconds < 300) {
+        setFreeSwaggerism(true);
+        setTimeLeft(300 - elapsedSeconds);
+        
+        // Auto-select swaggerism if we're in free mode
+        if (productType !== "swaggerism") {
+          setProductType("swaggerism");
+        }
+        
+        // Start the countdown
+        const timer = setInterval(() => {
+          setTimeLeft(prev => {
+            if (prev <= 1) {
+              clearInterval(timer);
+              setFreeSwaggerism(false);
+              localStorage.removeItem('swaggerismClaimTime');
+              localStorage.setItem('swaggerismFreeOffer', 'false');
+              toast.error("Time's up! The free offer has expired.");
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+        
+        return () => clearInterval(timer);
+      } else {
+        // Offer expired
+        setFreeSwaggerism(false);
+        localStorage.removeItem('swaggerismClaimTime');
+        localStorage.setItem('swaggerismFreeOffer', 'false');
+      }
+    }
+  }, [productType]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,7 +93,25 @@ const OrderForm = () => {
       setProductType(value as ProductType);
     } else if (name === "region") {
       setRegion(value as Region);
+    } else if (name === "bookCover") {
+      if (value === "hardcover") {
+        setShowCoverPopup(true);
+      } else {
+        setBookCover(value as BookCover);
+      }
     }
+  };
+
+  const handleSwitchToSoftcover = () => {
+    setBookCover("softcover");
+    setShowCoverPopup(false);
+    toast.success("Your selection has been updated to softcover.");
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' + secs : secs}`;
   };
 
   const getShippingCost = () => {
@@ -54,6 +121,8 @@ const OrderForm = () => {
   };
 
   const getProductPrice = () => {
+    if (freeSwaggerism && productType === "swaggerism") return 0;
+    
     switch (productType) {
       case "digital":
         return 9.99;
@@ -77,9 +146,11 @@ const OrderForm = () => {
       case "digital":
         return "Elevate Higher - Digital Copy";
       case "physical":
-        return "Elevate Higher - Physical Book";
+        return `Elevate Higher - Physical Book (${bookCover})`;
       case "swaggerism":
-        return "Swaggerism My Religion - Physical Book (Pre-Order)";
+        return freeSwaggerism 
+          ? "Swaggerism My Religion - FREE COPY (Limited Time Offer)" 
+          : "Swaggerism My Religion - Physical Book (Pre-Order)";
       case "bundle":
         return "Book Bundle: Elevate Higher + Swaggerism My Religion";
       default:
@@ -106,13 +177,15 @@ const OrderForm = () => {
         return;
       }
 
-      console.log("Submitting form data:", { productType, region, ...formData });
+      console.log("Submitting form data:", { productType, region, bookCover, ...formData });
       
       // Call the Supabase Edge Function
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
           productType,
           region,
+          bookCover,
+          isFreeSwaggerism: freeSwaggerism,
           customerEmail: formData.email,
           customerName: `${formData.firstName} ${formData.lastName}`,
           shippingAddress: {
@@ -131,6 +204,13 @@ const OrderForm = () => {
         toast.error("Something went wrong. Please try again.");
         setIsLoading(false);
         return;
+      }
+
+      // If it was a free Swaggerism claim and successful, clear the claim data
+      if (freeSwaggerism && productType === "swaggerism") {
+        localStorage.removeItem('swaggerismClaimTime');
+        localStorage.setItem('swaggerismFreeOffer', 'false');
+        setFreeSwaggerism(false);
       }
 
       // Redirect to Stripe Checkout
@@ -166,6 +246,15 @@ const OrderForm = () => {
     <>
       <section id="order" className="py-10 md:py-20 bg-gray-100">
         <div className="max-w-6xl mx-auto px-4">
+          {freeSwaggerism && productType === "swaggerism" && (
+            <div className="mb-8 p-4 rounded-lg bg-gradient-to-r from-green-500 to-blue-500 text-white text-center">
+              <h3 className="text-2xl font-bold mb-2">LIMITED TIME OFFER</h3>
+              <p className="text-lg">
+                Complete your order in the next <span className="font-bold text-yellow-300 text-2xl">{formatTime(timeLeft)}</span> and get your FREE copy of Swaggerism!
+              </p>
+            </div>
+          )}
+        
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Book Image & Description */}
             <div className="text-center md:text-left">
@@ -221,8 +310,14 @@ const OrderForm = () => {
                   }`} onClick={() => setProductType("swaggerism")}>
                     <h3 className="font-semibold mb-2">Swaggerism</h3>
                     <div>
-                      <span className="text-sm line-through text-gray-400 mr-1">$35.99</span>
-                      <span className="text-lg font-bold text-primary">$25.99</span>
+                      {freeSwaggerism ? (
+                        <span className="text-lg font-bold text-green-600">FREE</span>
+                      ) : (
+                        <>
+                          <span className="text-sm line-through text-gray-400 mr-1">$35.99</span>
+                          <span className="text-lg font-bold text-primary">$25.99</span>
+                        </>
+                      )}
                     </div>
                     <p className="text-xs text-gray-500 mt-1">Pre-Order (July 15)</p>
                   </div>
@@ -252,6 +347,22 @@ const OrderForm = () => {
                   <option value="swaggerism">Swaggerism Pre-Order</option>
                   <option value="bundle">Book Bundle</option>
                 </select>
+
+                {/* Book Cover Selection (only for physical) */}
+                {productType === "physical" && (
+                  <div>
+                    <label className="block text-sm font-medium mb-1 md:mb-2">Book Cover Type</label>
+                    <select 
+                      name="bookCover" 
+                      value={bookCover}
+                      onChange={handleSelectChange}
+                      className="w-full px-3 md:px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm md:text-base"
+                    >
+                      <option value="softcover">Softcover</option>
+                      <option value="hardcover">Hardcover</option>
+                    </select>
+                  </div>
+                )}
 
                 {/* Region Selection (only for physical but not bundle) */}
                 {(productType === "physical" || productType === "swaggerism") && (
@@ -406,12 +517,14 @@ const OrderForm = () => {
                   type="submit"
                   disabled={isLoading}
                   className={`w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-lg shadow-md ${
+                    freeSwaggerism ? "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white" :
                     productType === "bundle" 
                       ? "bg-green-600 hover:bg-green-700 text-white" 
                       : "bg-primary hover:bg-primary-hover text-white"
                   }`}
                 >
                   {isLoading ? "Processing..." : 
+                   freeSwaggerism ? "CLAIM YOUR FREE COPY NOW" :
                    productType === "digital" ? "GET INSTANT ACCESS NOW" :
                    productType === "swaggerism" ? "PRE-ORDER NOW" :
                    productType === "bundle" ? "GET BOTH BOOKS NOW" :
@@ -435,6 +548,13 @@ const OrderForm = () => {
       
       {/* Book Popup - for future marketing purposes */}
       <BookPopup isOpen={showBookPopup} onClose={() => setShowBookPopup(false)} />
+      
+      {/* Hardcover Out of Stock Popup */}
+      <BookCoverPopup 
+        isOpen={showCoverPopup} 
+        onClose={() => setShowCoverPopup(false)} 
+        onSwitch={handleSwitchToSoftcover} 
+      />
     </>
   );
 };

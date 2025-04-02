@@ -1,13 +1,38 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const SwaggerismPromo = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [freeOffer, setFreeOffer] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const claimTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Get the claim timestamp from localStorage
+    const storedClaimTime = localStorage.getItem('swaggerismClaimTime');
+    const storedIsFree = localStorage.getItem('swaggerismFreeOffer');
+    
+    if (storedClaimTime) {
+      const claimTime = parseInt(storedClaimTime);
+      const now = new Date().getTime();
+      const elapsedSeconds = Math.floor((now - claimTime) / 1000);
+      
+      // If less than 5 minutes have passed since claiming
+      if (elapsedSeconds < 300) {
+        claimTimeRef.current = claimTime;
+        setTimeLeft(300 - elapsedSeconds);
+        startTimer();
+      } else {
+        // Offer expired
+        setFreeOffer(storedIsFree === 'true');
+      }
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -23,8 +48,51 @@ const SwaggerismPromo = () => {
 
     return () => {
       if (element) observer.unobserve(element);
+      if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
+
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    
+    timerRef.current = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current!);
+          setFreeOffer(false);
+          localStorage.setItem('swaggerismFreeOffer', 'false');
+          toast.error("Time's up! The free offer has expired.");
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+  };
+
+  const handleClaim = () => {
+    // Set the claim timestamp
+    const now = new Date().getTime();
+    localStorage.setItem('swaggerismClaimTime', now.toString());
+    localStorage.setItem('swaggerismFreeOffer', 'true');
+    claimTimeRef.current = now;
+    
+    // Start the timer if it's not already running
+    if (!timerRef.current) {
+      setTimeLeft(300);
+      startTimer();
+    }
+    
+    // Scroll to checkout
+    handleScrollToCheckout();
+    
+    toast.info(`You have ${formatTime(timeLeft)} to complete your order for a FREE copy!`);
+  };
 
   const handleScrollToCheckout = () => {
     const checkoutElement = document.getElementById('order');
@@ -61,9 +129,16 @@ const SwaggerismPromo = () => {
                 alt="Swaggerism My Religion Book" 
                 className="w-full max-w-md rounded-lg shadow-2xl transform hover:rotate-2 transition-all duration-500"
               />
-              <div className="absolute -top-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-full font-bold shadow-lg rotate-12 animate-pulse">
-                PRE-ORDER<br/>NOW
-              </div>
+              {freeOffer && (
+                <div className="absolute -top-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-full font-bold shadow-lg rotate-12 animate-pulse">
+                  CLAIM<br/>FREE COPY
+                </div>
+              )}
+              {!freeOffer && (
+                <div className="absolute -top-4 -right-4 bg-red-600 text-white px-4 py-2 rounded-full font-bold shadow-lg rotate-12 animate-pulse">
+                  PRE-ORDER<br/>NOW
+                </div>
+              )}
             </div>
           </motion.div>
           
@@ -77,13 +152,27 @@ const SwaggerismPromo = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 md:mt-4 mb-4 md:mb-6">
               Swaggerism My Religion
             </h2>
-            <div className="mb-4 md:mb-6">
-              <span className="text-2xl line-through text-gray-400 mr-3">$35.99</span>
-              <span className="text-3xl font-bold text-white">$25.99</span>
-              <span className="ml-2 bg-green-600 text-white px-2 py-1 rounded text-sm font-medium">
-                SAVE 28%
-              </span>
-            </div>
+            
+            {freeOffer ? (
+              <div className="mb-4 md:mb-6 bg-gradient-to-r from-green-500 to-blue-500 p-4 rounded-lg">
+                <div className="flex items-center gap-2 text-xl font-bold mb-2">
+                  <Clock className="h-5 w-5" />
+                  <span>Limited Time Offer:</span>
+                  <span className="text-2xl text-yellow-300">{formatTime(timeLeft)}</span>
+                </div>
+                <p className="text-white">
+                  Claim your <span className="font-bold text-yellow-300">FREE COPY</span> now and complete checkout within 5 minutes!
+                </p>
+              </div>
+            ) : (
+              <div className="mb-4 md:mb-6">
+                <span className="text-2xl line-through text-gray-400 mr-3">$35.99</span>
+                <span className="text-3xl font-bold text-white">$25.99</span>
+                <span className="ml-2 bg-green-600 text-white px-2 py-1 rounded text-sm font-medium">
+                  SAVE 28%
+                </span>
+              </div>
+            )}
             
             <p className="text-lg mb-6 text-gray-300">
               Discover the revolutionary approach to confidence and self-expression that's changing lives worldwide. Pre-order today and be among the first to transform your life with the power of Swaggerism.
@@ -102,13 +191,23 @@ const SwaggerismPromo = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                onClick={handleScrollToCheckout}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 font-bold text-lg rounded-lg flex items-center justify-center"
-              >
-                Pre-Order Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              {freeOffer ? (
+                <Button 
+                  onClick={handleClaim}
+                  className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-3 font-bold text-lg rounded-lg flex items-center justify-center"
+                >
+                  Claim Your FREE Copy
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              ) : (
+                <Button 
+                  onClick={handleScrollToCheckout}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 font-bold text-lg rounded-lg flex items-center justify-center"
+                >
+                  Pre-Order Now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              )}
               <Button 
                 onClick={handleScrollToCheckout}
                 variant="outline"

@@ -21,10 +21,12 @@ import Ready from "@/components/Ready";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 import DualBookOffer from "@/components/DualBookOffer";
 import SwaggerismPromo from "@/components/SwaggerismPromo";
+import FlashSale from "@/components/FlashSale";
 
 const Index = () => {
   return (
     <div className="relative">
+      <FlashSale />
       <Hero />
       <Elevate />
       <Countdown />
