@@ -29,7 +29,8 @@ const SwaggerismPromo = () => {
         startTimer();
       } else {
         // Offer expired
-        setFreeOffer(storedIsFree === 'true');
+        setFreeOffer(false);
+        localStorage.setItem('swaggerismFreeOffer', 'false');
       }
     }
 
@@ -194,7 +195,7 @@ const SwaggerismPromo = () => {
               {freeOffer ? (
                 <Button 
                   onClick={handleClaim}
-                  className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-3 font-bold text-lg rounded-lg flex items-center justify-center"
+                  className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white px-8 py-3 font-bold text-xl md:text-2xl rounded-lg flex items-center justify-center"
                 >
                   Claim Your FREE Copy
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -202,19 +203,12 @@ const SwaggerismPromo = () => {
               ) : (
                 <Button 
                   onClick={handleScrollToCheckout}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 font-bold text-lg rounded-lg flex items-center justify-center"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 font-bold text-xl md:text-2xl rounded-lg flex items-center justify-center"
                 >
                   Pre-Order Now
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               )}
-              <Button 
-                onClick={handleScrollToCheckout}
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-8 py-3 font-bold text-lg rounded-lg"
-              >
-                Add to Bundle
-              </Button>
             </div>
             
             <p className="text-sm text-gray-400 mt-4">
