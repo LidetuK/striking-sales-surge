@@ -19,6 +19,7 @@ import BookOne from "@/components/BookOne";
 import Elevate from "@/components/Elevate";
 import Ready from "@/components/Ready";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
+import DualBookOffer from "@/components/DualBookOffer";
 
 const Index = () => {
   return (
@@ -32,6 +33,7 @@ const Index = () => {
       <OrderForm />
       <CallToAction />
       <AnimatedTestimonials />
+      <DualBookOffer/>
       <Ready />
       <BookShowcase />
       <Review />
