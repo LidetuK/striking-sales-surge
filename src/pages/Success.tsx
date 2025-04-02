@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Check, FileText, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Success = () => {
   const [searchParams] = useSearchParams();
@@ -27,10 +27,14 @@ const Success = () => {
           };
           setSessionData(mockSessionData);
           setIsLoading(false);
+
+          // Show a toast notification
+          toast.success("Order processed successfully!");
         }, 1000);
       } catch (error) {
         console.error("Error verifying session:", error);
         setIsLoading(false);
+        toast.error("Error retrieving order details");
       }
     };
 
