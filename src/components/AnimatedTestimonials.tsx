@@ -50,7 +50,8 @@ const AnimatedTestimonials = () => {
         <p className="text-center text-gray-400 mb-4 md:mb-8 text-sm md:text-base">Hear from readers who have transformed their lives with Elevate Higher</p>
       </div>
 
-      <style jsx global>{`
+      <style>
+        {`
         @keyframes scrollLeft {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -68,7 +69,8 @@ const AnimatedTestimonials = () => {
         .scroll-left:hover, .scroll-right:hover {
           animation-play-state: paused;
         }
-      `}</style>
+        `}
+      </style>
 
       {Object.entries(testimonialSections).map(([sectionName, testimonials], sectionIndex) => {
         // Create a continuous loop by duplicating testimonials multiple times
