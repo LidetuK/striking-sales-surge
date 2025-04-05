@@ -24,8 +24,12 @@ serve(async (req) => {
     const origin = req.headers.get('origin') || 'http://localhost:5173';
     console.log('Request origin:', origin);
     
-    // For digital products that are free, we don't need to create a Stripe session
+    // For digital products that are free, we still want to capture lead information but don't need Stripe
     if (productType === 'digital') {
+      // Here you could store the customer information in a database or send to a CRM
+      console.log('Capturing lead info for digital product:', { customerEmail, customerName });
+      
+      // Return success without creating a Stripe session
       return new Response(JSON.stringify({ 
         url: `${origin}/success?session_id=free_digital_${Date.now()}`,
         sessionId: `free_digital_${Date.now()}`
@@ -50,7 +54,7 @@ serve(async (req) => {
             name: `Elevate Higher Book - Physical Copy (${bookCover})`,
             description: 'Physical copy of Elevate Higher book',
           },
-          unit_amount: 2599, // $25.99 in cents - updated from $29.99
+          unit_amount: 2599, // $25.99 in cents
         },
         quantity: 1,
       });
@@ -164,7 +168,7 @@ serve(async (req) => {
             name: 'Book Bundle: Elevate Higher + Swaggerism My Religion',
             description: 'Physical copies of both Elevate Higher and Swaggerism My Religion',
           },
-          unit_amount: 2599, // $25.99 in cents - updated from $53.98
+          unit_amount: 2599, // $25.99 in cents
         },
         quantity: 1,
       });

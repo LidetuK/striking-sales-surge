@@ -29,14 +29,7 @@ const Navbar = () => {
             />
           </div>
           
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4">
-              
-            </div>
-          </div>
-          
-          {/* Mobile menu button */}
+          {/* Mobile menu button - kept for UI consistency but removed menu items */}
           <div className="md:hidden flex items-center">
             <button
               type="button"
@@ -56,15 +49,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu, show/hide based on menu state */}
+      {/* Mobile menu - now empty but kept for structure */}
       {isMenuOpen && (
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-md">
-            <a href="#" className="text-gray-800 hover:text-primary block px-3 py-2 rounded-md font-medium">Home</a>
-            <a href="#benefits" className="text-gray-800 hover:text-primary block px-3 py-2 rounded-md font-medium">Benefits</a>
-            <a href="#testimonials" className="text-gray-800 hover:text-primary block px-3 py-2 rounded-md font-medium">Testimonials</a>
-            <a href="#order" className="text-gray-800 hover:text-primary block px-3 py-2 rounded-md font-medium">Order</a>
-            <a href="#faq" className="text-gray-800 hover:text-primary block px-3 py-2 rounded-md font-medium">FAQ</a>
             <div className="mt-4 px-3">
               <Button 
                 onClick={() => {

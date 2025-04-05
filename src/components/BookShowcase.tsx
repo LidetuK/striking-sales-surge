@@ -19,15 +19,14 @@ const BookShowcase = () => {
           By focusing on these areas, you can achieve more abundance and fulfillment than ever before.
         </p>
 
-        {/* Availability Notice */}
+        {/* Lead Generation Focus */}
         <div className="mt-8 bg-white text-gray-900 p-6 rounded-lg shadow-lg">
           <p className="text-lg font-bold uppercase">
-            DUE TO THE HIGH DEMAND FOR THIS TRANSFORMATIVE BOOK, IT MAY TAKE A FEW SECONDS TO LOAD AFTER YOU PLACE YOUR ORDER HERE ONLINE.
+            ENTER YOUR DETAILS BELOW TO STAY UPDATED
           </p>
           <p className="mt-4 text-lg">
-            YOUR <span className="text-indigo-700 font-bold">FREE COPY</span> 
-            MAY TAKE <strong>14-25 BUSINESS DAYS</strong> TO BE DELIVERED TO YOUR DOORSTEP.  
-            I KINDLY ASK FOR YOUR PATIENCE DURING THIS PROCESS…
+            GET ACCESS TO <span className="text-indigo-700 font-bold">FREE INSIGHTS</span> 
+            AND SPECIAL UPDATES EVEN BEFORE ORDERING YOUR COPY
           </p>
         </div>
 
@@ -49,7 +48,7 @@ const BookShowcase = () => {
               document.getElementById("order")?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Rush Me My Free Copy
+            Enter Your Details Now
           </button>
         </div>
 
