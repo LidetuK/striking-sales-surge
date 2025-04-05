@@ -17,35 +17,37 @@ serve(async (req) => {
   }
   
   try {
-    const { productType, customerEmail, customerName, shippingAddress, region } = await req.json();
+    const { productType, customerEmail, customerName, shippingAddress, region, bookCover, isFreeSwaggerism } = await req.json();
     
-    console.log('Creating checkout session with:', { productType, customerEmail, customerName, shippingAddress, region });
+    console.log('Creating checkout session with:', { productType, customerEmail, customerName, shippingAddress, region, isFreeSwaggerism });
     
     const origin = req.headers.get('origin') || 'http://localhost:5173';
     console.log('Request origin:', origin);
+    
+    // For digital products that are free, we don't need to create a Stripe session
+    if (productType === 'digital') {
+      return new Response(JSON.stringify({ 
+        url: `${origin}/success?session_id=free_digital_${Date.now()}`,
+        sessionId: `free_digital_${Date.now()}`
+      }), {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+        },
+      });
+    }
     
     // Define line items based on product type
     let lineItems = [];
     let requiresShipping = false;
     
-    if (productType === 'digital') {
+    if (productType === 'physical') {
       lineItems.push({
         price_data: {
           currency: 'usd',
           product_data: {
-            name: 'Elevate Higher Book - Digital Copy',
-            description: 'Instant digital copy of Elevate Higher book',
-          },
-          unit_amount: 999, // $9.99 in cents
-        },
-        quantity: 1,
-      });
-    } else if (productType === 'physical') {
-      lineItems.push({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'Elevate Higher Book - Physical Copy',
+            name: `Elevate Higher Book - Physical Copy (${bookCover})`,
             description: 'Physical copy of Elevate Higher book',
           },
           unit_amount: 2999, // $29.99 in cents
@@ -79,40 +81,78 @@ serve(async (req) => {
       
       requiresShipping = true;
     } else if (productType === 'swaggerism') {
-      lineItems.push({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'Swaggerism My Religion - Physical Copy (Pre-Order)',
-            description: 'Pre-order of Swaggerism My Religion book (Ships July 15)',
-          },
-          unit_amount: 2599, // $25.99 in cents
-        },
-        quantity: 1,
-      });
-      
-      // Add shipping costs based on region
-      let shippingCost = 0;
-      if (region === 'us_canada') {
-        // USA & Canada: Shipping $11.99 + handling $2.98 = $14.97
-        shippingCost = 1497;
-      } else if (region === 'europe') {
-        // Europe: Shipping (including handling) is $14.99
-        shippingCost = 1499;
-      }
-      
-      if (shippingCost > 0) {
+      // Check if it's the free Swaggerism offer
+      if (isFreeSwaggerism) {
         lineItems.push({
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Shipping & Handling',
-              description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
+              name: 'Swaggerism My Religion - FREE Copy (Pre-Order)',
+              description: 'Limited Time Offer: Free copy of Swaggerism My Religion (Ships July 15)',
             },
-            unit_amount: shippingCost,
+            unit_amount: 0, // Free
           },
           quantity: 1,
         });
+        
+        // Still need to add shipping even for free book
+        let shippingCost = 0;
+        if (region === 'us_canada') {
+          shippingCost = 1497;
+        } else if (region === 'europe') {
+          shippingCost = 1499;
+        }
+        
+        if (shippingCost > 0) {
+          lineItems.push({
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'Shipping & Handling',
+                description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
+              },
+              unit_amount: shippingCost,
+            },
+            quantity: 1,
+          });
+        }
+      } else {
+        // Regular Swaggerism pre-order
+        lineItems.push({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Swaggerism My Religion - Physical Copy (Pre-Order)',
+              description: 'Pre-order of Swaggerism My Religion book (Ships July 15)',
+            },
+            unit_amount: 2599, // $25.99 in cents
+          },
+          quantity: 1,
+        });
+        
+        // Add shipping costs based on region
+        let shippingCost = 0;
+        if (region === 'us_canada') {
+          // USA & Canada: Shipping $11.99 + handling $2.98 = $14.97
+          shippingCost = 1497;
+        } else if (region === 'europe') {
+          // Europe: Shipping (including handling) is $14.99
+          shippingCost = 1499;
+        }
+        
+        if (shippingCost > 0) {
+          lineItems.push({
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'Shipping & Handling',
+                description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
+              },
+              unit_amount: shippingCost,
+            },
+            quantity: 1,
+          });
+        }
       }
       
       requiresShipping = true;
