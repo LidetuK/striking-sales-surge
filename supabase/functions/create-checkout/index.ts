@@ -21,7 +21,8 @@ serve(async (req) => {
     
     console.log('Creating checkout session with:', { productType, customerEmail, customerName, shippingAddress, region, isFreeSwaggerism });
     
-    const origin = req.headers.get('origin') || 'http://localhost:5173';
+    const origin = req.headers.get('origin') || 'https://books.reskque.com';
+    const basePath = '/empowerment/self-development-guide/elevate-higher-the-book';
     console.log('Request origin:', origin);
     
     // For digital products that are free, we still want to capture lead information but don't need Stripe
@@ -31,7 +32,7 @@ serve(async (req) => {
       
       // Return success without creating a Stripe session
       return new Response(JSON.stringify({ 
-        url: `${origin}/success?session_id=free_digital_${Date.now()}`,
+        url: `${origin}${basePath}/success?session_id=free_digital_${Date.now()}`,
         sessionId: `free_digital_${Date.now()}`
       }), {
         status: 200,
@@ -197,8 +198,8 @@ serve(async (req) => {
         customer_name: customerName,
         product_type: productType,
       },
-      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}#order`,
+      success_url: `${origin}${basePath}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}${basePath}/#order`,
     };
     
     // Only add shipping address collection for physical products

@@ -21,6 +21,11 @@ const queryClient = new QueryClient({
   },
 })
 
+// Get basename from environment or default for development
+const basename = import.meta.env.MODE === 'development' 
+  ? '/' 
+  : '/empowerment/self-development-guide/elevate-higher-the-book'
+
 function App() {
   useEffect(() => {
     // Handle animation on scroll
@@ -44,7 +49,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename={basename}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
