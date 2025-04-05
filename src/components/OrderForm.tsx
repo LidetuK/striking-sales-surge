@@ -157,6 +157,43 @@ const OrderForm = () => {
     }
   };
 
+  const sendLeadInfoToEmail = async () => {
+    try {
+      const web3FormData = new FormData();
+      web3FormData.append('access_key', 'f39f7a05-fac0-4032-a2cc-e68fff78426c');
+      web3FormData.append('from_name', 'Elevate Higher Book Form');
+      web3FormData.append('subject', 'New Book Order Lead Submission');
+      web3FormData.append('to', 'seginc@gmail.com');
+      web3FormData.append('name', `${formData.firstName} ${formData.lastName}`);
+      web3FormData.append('email', formData.email);
+      web3FormData.append('product', getProductName());
+      web3FormData.append('price', `$${getTotalPrice().toFixed(2)}`);
+      
+      if (productType !== "digital") {
+        web3FormData.append('address', formData.address);
+        web3FormData.append('city', formData.city);
+        web3FormData.append('state', formData.state);
+        web3FormData.append('zipCode', formData.zipCode);
+        web3FormData.append('region', region);
+      }
+      
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: web3FormData
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        console.log('Lead info sent successfully to email');
+      } else {
+        console.error('Error sending lead info to email:', data);
+      }
+    } catch (error) {
+      console.error('Error in sendLeadInfoToEmail:', error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -175,6 +212,8 @@ const OrderForm = () => {
       }
 
       console.log("Submitting form data:", { productType, region, bookCover, ...formData });
+      
+      await sendLeadInfoToEmail();
       
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
