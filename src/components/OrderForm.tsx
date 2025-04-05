@@ -126,11 +126,11 @@ const OrderForm = () => {
     
     switch (productType) {
       case "physical":
-        return 29.99;
+        return 25.99;
       case "swaggerism":
         return 25.99;
       case "bundle":
-        return 53.98;
+        return 25.99;
       default:
         return 0;
     }
@@ -149,7 +149,7 @@ const OrderForm = () => {
       case "swaggerism":
         return freeSwaggerism 
           ? "Swaggerism My Religion - FREE COPY (Limited Time Offer)" 
-          : "Swaggerism My Religion - Physical Book (Pre-Order)";
+          : "Swaggerism My Religion - Physical Book";
       case "bundle":
         return "Book Bundle: Elevate Higher + Swaggerism My Religion";
       default:
@@ -404,7 +404,10 @@ const OrderForm = () => {
                             </div>
                             <div>
                               <h4 className="font-medium text-base">Physical Book</h4>
-                              <p className="text-lg font-medium text-primary">$29.99</p>
+                              <p>
+                                <span className="text-sm line-through text-gray-400 mr-1">$35.99</span>
+                                <span className="text-lg font-medium text-primary">$25.99</span>
+                              </p>
                               <p className="text-xs text-gray-500 mt-1">Elevate Higher</p>
                             </div>
                           </div>
@@ -434,7 +437,7 @@ const OrderForm = () => {
                                   </>
                                 )}
                               </div>
-                              <p className="text-xs text-gray-500 mt-1">Pre-Order (July 15)</p>
+                              <p className="text-xs text-gray-500 mt-1">Ships July 15</p>
                             </div>
                           </div>
                         </div>
@@ -454,11 +457,11 @@ const OrderForm = () => {
                             <div>
                               <h4 className="font-medium text-base">Book Bundle</h4>
                               <div>
-                                <span className="text-sm line-through text-gray-400 mr-1">$59.98</span>
-                                <span className="text-lg font-medium text-green-600">$53.98</span>
+                                <span className="text-sm line-through text-gray-400 mr-1">$35.99</span>
+                                <span className="text-lg font-medium text-green-600">$25.99</span>
                               </div>
                               <p className="text-xs text-green-600 font-medium mt-1">FREE SHIPPING</p>
-                              <div className="mt-1 text-xs bg-green-600 text-white rounded-full py-0.5 px-2 inline-block">SAVE 10%</div>
+                              <div className="mt-1 text-xs bg-green-600 text-white rounded-full py-0.5 px-2 inline-block">SAVE 28%</div>
                             </div>
                           </div>
                         </div>
@@ -667,7 +670,7 @@ const OrderForm = () => {
                         
                         {productType === "swaggerism" && (
                           <div className="mt-2 text-sm text-amber-600">
-                            <p>* Pre-order ships July 15, 2023</p>
+                            <p>* Ships July 15, 2023</p>
                           </div>
                         )}
                         
@@ -716,9 +719,9 @@ const OrderForm = () => {
                           {isLoading ? "Processing..." : 
                            productType === "digital" ? "GET FREE ACCESS NOW" :
                            freeSwaggerism && productType === "swaggerism" ? "CLAIM YOUR FREE COPY NOW" :
-                           productType === "swaggerism" ? "PRE-ORDER NOW" :
-                           productType === "bundle" ? "GET BOTH BOOKS NOW" :
-                           "COMPLETE ORDER NOW"}
+                           productType === "swaggerism" ? "RUSH ME MY COPY NOW" :
+                           productType === "bundle" ? "RUSH ME MY COPIES NOW" :
+                           "RUSH ME MY COPY NOW"}
                         </Button>
                       </div>
                     </div>

@@ -50,7 +50,7 @@ serve(async (req) => {
             name: `Elevate Higher Book - Physical Copy (${bookCover})`,
             description: 'Physical copy of Elevate Higher book',
           },
-          unit_amount: 2999, // $29.99 in cents
+          unit_amount: 2599, // $25.99 in cents - updated from $29.99
         },
         quantity: 1,
       });
@@ -122,8 +122,8 @@ serve(async (req) => {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Swaggerism My Religion - Physical Copy (Pre-Order)',
-              description: 'Pre-order of Swaggerism My Religion book (Ships July 15)',
+              name: 'Swaggerism My Religion - Physical Copy',
+              description: 'Swaggerism My Religion book (Ships July 15)',
             },
             unit_amount: 2599, // $25.99 in cents
           },
@@ -162,9 +162,9 @@ serve(async (req) => {
           currency: 'usd',
           product_data: {
             name: 'Book Bundle: Elevate Higher + Swaggerism My Religion',
-            description: 'Physical copies of both Elevate Higher and Swaggerism My Religion (Pre-Order)',
+            description: 'Physical copies of both Elevate Higher and Swaggerism My Religion',
           },
-          unit_amount: 5398, // $53.98 in cents
+          unit_amount: 2599, // $25.99 in cents - updated from $53.98
         },
         quantity: 1,
       });

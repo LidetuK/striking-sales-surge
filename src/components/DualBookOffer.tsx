@@ -84,7 +84,7 @@ const DualBookOffer = () => {
               <div className="text-center">
                 <h3 className="text-xl md:text-2xl font-bold mb-2">Elevate Higher</h3>
                 <p className="text-white/80 text-sm md:text-base">Unlock your potential and achieve greater success with proven strategies for personal growth.</p>
-                <div className="mt-2 text-white/70 text-sm">Individual price: <span className="line-through">$39.99</span> <span className="text-white font-bold">$29.99</span></div>
+                <div className="mt-2 text-white/70 text-sm">Individual price: <span className="line-through">$39.99</span> <span className="text-white font-bold text-green-400">FREE</span></div>
               </div>
             </div>
             <div className="mt-auto pt-4">
@@ -102,7 +102,7 @@ const DualBookOffer = () => {
                 onClick={handleScrollToCheckout}
                 className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
               >
-                Order Now
+                Get Free Copy
               </Button>
             </div>
           </motion.div>
@@ -128,7 +128,7 @@ const DualBookOffer = () => {
                 <div className="mt-2 text-white/70 text-sm">Individual price: <span className="line-through">$35.99</span> <span className="text-white font-bold">$25.99</span></div>
                 <div className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-600 text-white">
                   <Calendar className="h-3 w-3 mr-1" />
-                  PRE-ORDER (Launches July 15)
+                  Coming July 15
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@ const DualBookOffer = () => {
                 onClick={handleScrollToCheckout}
                 className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white"
               >
-                Pre-Order Now
+                RUSH ME MY COPY NOW
               </Button>
             </div>
           </motion.div>
@@ -185,9 +185,9 @@ const DualBookOffer = () => {
               <div className="mb-6">
                 <div className="flex items-baseline mb-2">
                   <span className="text-xl">Bundle Price:</span>
-                  <span className="line-through text-white/70 ml-2">$59.98</span>
-                  <span className="text-3xl font-bold ml-2">$53.98</span>
-                  <span className="ml-2 text-sm bg-green-600 text-white px-2 py-1 rounded">SAVE 10%</span>
+                  <span className="line-through text-white/70 ml-2">$35.99</span>
+                  <span className="text-3xl font-bold ml-2">$25.99</span>
+                  <span className="ml-2 text-sm bg-green-600 text-white px-2 py-1 rounded">SAVE 28%</span>
                 </div>
                 <p className="text-sm text-white/80">
                   <Package className="inline h-4 w-4 mr-1" /> 
@@ -203,7 +203,7 @@ const DualBookOffer = () => {
                 onClick={handleScrollToCheckout}
                 className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-4 font-bold uppercase rounded-lg flex items-center justify-center w-full md:w-auto transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                Get Both Books
+                RUSH ME MY COPIES NOW
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </div>

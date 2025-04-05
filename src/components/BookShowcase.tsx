@@ -34,11 +34,11 @@ const BookShowcase = () => {
         {/* Ordering Options */}
         <div className="mt-8">
           <p className="text-lg">
-            As a special offer, this book is available to you <strong>for free</strong>. 
+            <strong>For a limited time</strong>, this book is available to you <strong>completely FREE</strong>. 
             All I ask is that you cover the shipping and handling costs, and we will send it to you anywhere in the world.
           </p>
           <p className="mt-4 text-lg">
-            If you prefer to listen to the audiobook or read it on your Kindle, iBooks, or as a PDF, these digital versions are also available for a small fee. 
+            If you prefer to listen to the audiobook or read it on your Kindle, iBooks, or as a PDF, these digital versions are also available for free. 
             Simply enter your details below to access these options.
           </p>
 
@@ -49,7 +49,7 @@ const BookShowcase = () => {
               document.getElementById("order")?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Claim Your Free Copy
+            Rush Me My Free Copy
           </button>
         </div>
 
