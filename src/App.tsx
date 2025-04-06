@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
   },
 })
 
-// Get basename from environment or default for development
+// Get basename from environment or default for deployment
 const basename = import.meta.env.MODE === 'development' 
   ? '/' 
   : '/empowerment/self-development-guide/elevate-higher-the-book'

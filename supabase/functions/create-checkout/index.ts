@@ -1,238 +1,136 @@
 
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { corsHeaders } from "../_shared/cors.ts";
-import Stripe from 'https://esm.sh/stripe@12.18.0';
-
-// Use the provided Stripe secret key
-const stripeSecretKey = Deno.env.get('STRIPE_SECRET_KEY') || 'sk_test_51Gx2sVCNjyaQ14tCkUFXzPWfxUlklnrdpAuCFIJdjOOYGXtRckpGVf2SVvONUq3z7N81TqWWBlv2K0u91pY1yVvr0059r3ugyr';
-
-const stripe = new Stripe(stripeSecretKey, {
-  apiVersion: '2023-10-16',
-});
+import Stripe from "https://esm.sh/stripe@17.7.0?target=deno";
 
 serve(async (req) => {
-  // Handle CORS preflight requests
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
   }
-  
+
   try {
-    const { productType, customerEmail, customerName, shippingAddress, region, bookCover, isFreeSwaggerism } = await req.json();
+    const { 
+      productType, 
+      region, 
+      bookCover, 
+      isFreeSwaggerism, 
+      customerEmail, 
+      customerName, 
+      shippingAddress 
+    } = await req.json();
     
-    console.log('Creating checkout session with:', { productType, customerEmail, customerName, shippingAddress, region, isFreeSwaggerism });
+    // Initialize Stripe
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
+      apiVersion: "2023-10-16",
+    });
+
+    // Check if it's a digital product, which is free
+    if (productType === "digital") {
+      // Just return success for digital products
+      return new Response(
+        JSON.stringify({ success: true }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
     
-    const origin = req.headers.get('origin') || 'https://books.reskque.com';
-    const basePath = '/empowerment/self-development-guide/elevate-higher-the-book';
-    console.log('Request origin:', origin);
+    // Get origin with proper base path handling for deployment
+    const origin = req.headers.get("origin") || "";
+    const referer = req.headers.get("referer") || "";
+    let basePath = "";
     
-    // For digital products that are free, we still want to capture lead information but don't need Stripe
-    if (productType === 'digital') {
-      // Here you could store the customer information in a database or send to a CRM
-      console.log('Capturing lead info for digital product:', { customerEmail, customerName });
-      
-      // Return success without creating a Stripe session
-      return new Response(JSON.stringify({ 
-        url: `${origin}${basePath}/success?session_id=free_digital_${Date.now()}`,
-        sessionId: `free_digital_${Date.now()}`
-      }), {
-        status: 200,
-        headers: {
-          ...corsHeaders,
-          'Content-Type': 'application/json',
+    // Determine base path for production vs development
+    if (referer.includes("/empowerment/self-development-guide/elevate-higher-the-book/") || 
+        origin.includes("books.reskque.com")) {
+      basePath = "/empowerment/self-development-guide/elevate-higher-the-book";
+    }
+    
+    // Get product price based on type
+    let productPrice = 0;
+    if (productType === "physical" || productType === "swaggerism" || productType === "bundle") {
+      productPrice = 2599; // $25.99
+    }
+    
+    if (isFreeSwaggerism && productType === "swaggerism") {
+      productPrice = 0;
+    }
+    
+    // Calculate shipping cost
+    let shippingCost = 0;
+    if (productType !== "digital" && productType !== "bundle") {
+      shippingCost = region === "us_canada" ? 1497 : 1499; // $14.97 or $14.99
+    }
+    
+    // Determine product name
+    let productName = "Elevate Higher";
+    if (productType === "swaggerism") {
+      productName = isFreeSwaggerism ? "Swaggerism My Religion - FREE COPY" : "Swaggerism My Religion";
+    } else if (productType === "bundle") {
+      productName = "Book Bundle: Elevate Higher + Swaggerism My Religion";
+    } else if (productType === "physical") {
+      productName = `Elevate Higher - Physical Book (${bookCover})`;
+    }
+    
+    // Create line items
+    const lineItems = [];
+    
+    // Add product
+    if (productPrice > 0) {
+      lineItems.push({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: productName,
+          },
+          unit_amount: productPrice,
         },
+        quantity: 1,
       });
     }
     
-    // Define line items based on product type
-    let lineItems = [];
-    let requiresShipping = false;
-    
-    if (productType === 'physical') {
+    // Add shipping if applicable
+    if (shippingCost > 0) {
       lineItems.push({
         price_data: {
-          currency: 'usd',
+          currency: "usd",
           product_data: {
-            name: `Elevate Higher Book - Physical Copy (${bookCover})`,
-            description: 'Physical copy of Elevate Higher book',
+            name: "Shipping",
           },
-          unit_amount: 2599, // $25.99 in cents
+          unit_amount: shippingCost,
         },
         quantity: 1,
       });
-      
-      // Add shipping costs based on region
-      let shippingCost = 0;
-      if (region === 'us_canada') {
-        // USA & Canada: Shipping $11.99 + handling $2.98 = $14.97
-        shippingCost = 1497;
-      } else if (region === 'europe') {
-        // Europe: Shipping (including handling) is $14.99
-        shippingCost = 1499;
-      }
-      
-      if (shippingCost > 0) {
-        lineItems.push({
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Shipping & Handling',
-              description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
-            },
-            unit_amount: shippingCost,
-          },
-          quantity: 1,
-        });
-      }
-      
-      requiresShipping = true;
-    } else if (productType === 'swaggerism') {
-      // Check if it's the free Swaggerism offer
-      if (isFreeSwaggerism) {
-        lineItems.push({
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Swaggerism My Religion - FREE Copy (Pre-Order)',
-              description: 'Limited Time Offer: Free copy of Swaggerism My Religion (Ships July 15)',
-            },
-            unit_amount: 0, // Free
-          },
-          quantity: 1,
-        });
-        
-        // Still need to add shipping even for free book
-        let shippingCost = 0;
-        if (region === 'us_canada') {
-          shippingCost = 1497;
-        } else if (region === 'europe') {
-          shippingCost = 1499;
-        }
-        
-        if (shippingCost > 0) {
-          lineItems.push({
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: 'Shipping & Handling',
-                description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
-              },
-              unit_amount: shippingCost,
-            },
-            quantity: 1,
-          });
-        }
-      } else {
-        // Regular Swaggerism pre-order
-        lineItems.push({
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Swaggerism My Religion - Physical Copy',
-              description: 'Swaggerism My Religion book (Ships July 15)',
-            },
-            unit_amount: 2599, // $25.99 in cents
-          },
-          quantity: 1,
-        });
-        
-        // Add shipping costs based on region
-        let shippingCost = 0;
-        if (region === 'us_canada') {
-          // USA & Canada: Shipping $11.99 + handling $2.98 = $14.97
-          shippingCost = 1497;
-        } else if (region === 'europe') {
-          // Europe: Shipping (including handling) is $14.99
-          shippingCost = 1499;
-        }
-        
-        if (shippingCost > 0) {
-          lineItems.push({
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: 'Shipping & Handling',
-                description: region === 'us_canada' ? 'USA & Canada Shipping & Handling' : 'Europe Shipping & Handling',
-              },
-              unit_amount: shippingCost,
-            },
-            quantity: 1,
-          });
-        }
-      }
-      
-      requiresShipping = true;
-    } else if (productType === 'bundle') {
-      lineItems.push({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'Book Bundle: Elevate Higher + Swaggerism My Religion',
-            description: 'Physical copies of both Elevate Higher and Swaggerism My Religion',
-          },
-          unit_amount: 2599, // $25.99 in cents
-        },
-        quantity: 1,
-      });
-      
-      lineItems.push({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'FREE Shipping & Handling',
-            description: 'Complimentary shipping for the bundle',
-          },
-          unit_amount: 0,
-        },
-        quantity: 1,
-      });
-      
-      requiresShipping = true;
     }
     
-    const sessionConfig = {
-      payment_method_types: ['card'],
+    // Create Checkout Session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
       line_items: lineItems,
-      mode: 'payment',
+      mode: "payment",
       customer_email: customerEmail,
-      metadata: {
-        customer_name: customerName,
-        product_type: productType,
-      },
+      client_reference_id: customerName,
       success_url: `${origin}${basePath}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}${basePath}/#order`,
-    };
-    
-    // Only add shipping address collection for physical products
-    if (requiresShipping) {
-      sessionConfig.shipping_address_collection = {
-        allowed_countries: region === 'us_canada' ? ['US', 'CA'] : ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'],
-      };
-      sessionConfig.metadata.shipping_address = JSON.stringify(shippingAddress);
-    }
-
-    const session = await stripe.checkout.sessions.create(sessionConfig);
-
-    console.log('Checkout session created:', session.id);
-    console.log('Checkout session URL:', session.url);
-    
-    return new Response(JSON.stringify({ 
-      url: session.url,
-      sessionId: session.id
-    }), {
-      status: 200,
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/json',
+      cancel_url: `${origin}${basePath}/`,
+      shipping_address_collection: productType !== "digital" ? {
+        allowed_countries: ["US", "CA", "GB", "DE", "FR", "ES", "IT"],
+      } : undefined,
+      metadata: {
+        productType,
+        customerName,
+        customerEmail,
+        shippingInfo: productType !== "digital" ? JSON.stringify(shippingAddress) : "",
       },
     });
+    
+    return new Response(
+      JSON.stringify({ url: session.url }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+    
   } catch (error) {
-    console.error('Error creating checkout session:', error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 400,
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/json',
-      },
-    });
+    console.error("Error:", error.message);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+    );
   }
 });
